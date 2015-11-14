@@ -12,10 +12,9 @@
  */
 
 
-Route::get('/',function() {
-    return view('welcome');
-});
-/**
+Route::get('/', ['as'=>'userDashboard', 'uses'=>'User\UserController@getUserDashboard']);
+
+ /**
  * admin route start here.....
  * 
 */
