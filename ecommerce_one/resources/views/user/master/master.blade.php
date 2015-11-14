@@ -97,7 +97,7 @@
                         @include('user.includes.aside_left')
                         <!-- end: left side menu -->
                         <!--start: main content-->
-                         @yields('main_content')
+                         @yield('main_content')
                          
                         <!--end: main content-->
                     </div>

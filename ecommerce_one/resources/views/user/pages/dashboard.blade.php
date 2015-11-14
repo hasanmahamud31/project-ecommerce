@@ -1,4 +1,6 @@
-@extend('user.master.master')
+<?php dd($category); ?>
+
+@extends('user.master.master')
 @section('main_content')
 <section class="col-lg-9 col-md-9 col-sm-9">
     <h2 class="tt_uppercase color_dark m_bottom_10 heading5 animate_ftr">Featured products</h2>
@@ -528,4 +530,4 @@
         <a href="#" class="d_block t_align_c animate_fade"><img src="{{URL::to('front_end_resource/images/brand_logo.jpg')}}" alt=""></a>
     </div>
 </section>
-@end
+@stop

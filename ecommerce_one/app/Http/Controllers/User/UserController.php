@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Model\Admin\CategoryModel;
+
 
 class UserController extends Controller
 {
@@ -15,7 +17,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getUserDashboard(){
-        return view('user.pages.dashboard');
+        $category = CategoryModel::getCategory();
+        return view('user.pages.dashboard')->with('category',$category);
     }
 
     /**
