@@ -1,4 +1,4 @@
-<?php dd($category); ?>
+<?php //dd($category); ?>
 
 @extends('user.master.master')
 @section('main_content')

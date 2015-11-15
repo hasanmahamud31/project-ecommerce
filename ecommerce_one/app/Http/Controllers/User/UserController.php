@@ -3,22 +3,21 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\CategoryModel;
 
+class UserController extends Controller {
 
-class UserController extends Controller
-{
     /**
      * Display a user end front page.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getUserDashboard(){
-        $category = CategoryModel::getCategory();
-        return view('user.pages.dashboard')->with('category',$category);
+    public function getUserDashboard() {
+        $categoryAndSubcategory = CategoryModel::getCategory();
+        
+        return view('user.pages.dashboard')->with('categoryAndSubcategory', $categoryAndSubcategory);
     }
 
     /**
@@ -26,8 +25,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -36,8 +34,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -47,8 +44,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -58,8 +54,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -69,8 +64,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -81,8 +75,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -92,8 +85,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }
