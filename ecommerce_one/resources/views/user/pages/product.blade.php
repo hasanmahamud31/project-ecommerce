@@ -1,5 +1,6 @@
 @extends('user.master.master')
 @section('main_content')
+
 <section class="col-lg-9 col-md-9 col-sm-9 m_xs_bottom_30">
     <div class="clearfix m_bottom_30 t_xs_align_c">
         <div class="photoframe type_2 shadow r_corners f_left f_sm_none d_xs_inline_b product_single_preview relative m_right_30 m_bottom_5 m_sm_bottom_20 m_xs_right_0 w_mxs_full">
@@ -116,7 +117,7 @@
                 </tr>
             </table>
             <div class="d_ib_offset_0 m_bottom_20">
-                <button class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large">Add to Cart</button>
+                <button class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large" id="add_to_cart" value="{{route('addToCart', ['id' => $products['id']])}}">Add to Cart</button>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Wishlist</span><i class="fa fa-heart-o f_size_big"></i></button>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Compare</span><i class="fa fa-files-o f_size_big"></i></button>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0 relative"><i class="fa fa-question-circle f_size_big"></i><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Ask a Question</span></button>
@@ -379,8 +380,8 @@
             <!--product preview-->
             <a href="#" class="d_block relative pp_wrap">
                 <!--hot product-->
-                <span class="hot_stripe type_2"><img src="images/hot_product_type_2.png" alt=""></span>
-                <img src="images/product_img_5.jpg" class="tr_all_hover" alt="">
+                <span class="hot_stripe type_2"><img src="{{URL::to('front_end_resource/images/hot_product_type_2.png')}}" alt=""></span>
+                <img src="{{URL::to('front_end_resource/images/product_img_5.jpg')}}" class="tr_all_hover" alt="">
                 <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
             </a>
             <!--description and price of product-->
@@ -418,7 +419,7 @@
         <figure class="r_corners photoframe shadow relative d_xs_inline_b tr_all_hover">
             <!--product preview-->
             <a href="#" class="d_block relative pp_wrap">
-                <img src="images/product_img_7.jpg" class="tr_all_hover" alt="">
+                <img src="{{URL::to('front_end_resource/images/product_img_7.jpg')}}" class="tr_all_hover" alt="">
                 <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
             </a>
             <!--description and price of product-->
@@ -457,8 +458,8 @@
             <!--product preview-->
             <a href="#" class="d_block relative pp_wrap">
                 <!--sale product-->
-                <span class="hot_stripe type_2"><img src="images/sale_product_type_2.png" alt=""></span>
-                <img src="images/product_img_8.jpg" class="tr_all_hover" alt="">
+                <span class="hot_stripe type_2"><img src="{{URL::to('front_end_resource/images/sale_product_type_2.png')}}" alt=""></span>
+                <img src="{{URL::to('front_end_resource/images/product_img_8.jpg')}}" class="tr_all_hover" alt="">
                 <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
             </a>
             <!--description and price of product-->
@@ -497,8 +498,8 @@
             <!--product preview-->
             <a href="#" class="d_block relative pp_wrap">
                 <!--hot product-->
-                <span class="hot_stripe type_2"><img src="images/hot_product_type_2.png" alt=""></span>
-                <img src="images/product_img_3.jpg" class="tr_all_hover" alt="">
+                <span class="hot_stripe type_2"><img src="{{URL::to('front_end_resource/images/hot_product_type_2.png')}}" alt=""></span>
+                <img src="{{URL::to('front_end_resource/images/product_img_3.jpg')}}" class="tr_all_hover" alt="">
                 <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
             </a>
             <!--description and price of product-->
@@ -575,8 +576,8 @@
             <!--product preview-->
             <a href="#" class="d_block relative pp_wrap">
                 <!--sale product-->
-                <span class="hot_stripe type_2"><img src="images/sale_product_type_2.png" alt=""></span>
-                <img src="images/product_img_9.jpg" class="tr_all_hover" alt="">
+                <span class="hot_stripe type_2"><img src="{{URL::to('front_end_resource/images/sale_product_type_2.png')}}" alt=""></span>
+                <img src="{{URL::to('front_end_resource/images/product_img_9.jpg')}}" class="tr_all_hover" alt="">
                 <span data-popup="#quick_view_product" class="t_md_align_c button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
             </a>
             <!--description and price of product-->
@@ -608,7 +609,7 @@
                         </li>
                     </ul>
                 </div>
-                <button class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0">Add to Cart</button>
+                <button class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0" value="">Add to Cart</button>
             </figcaption>
         </figure>
     </div>

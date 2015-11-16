@@ -15,6 +15,7 @@
 Route::get('/', ['as'=>'userDashboard', 'uses'=>'User\UserController@getUserDashboard']);
 Route::get('/product/{productId}', ['as'=>'singleProduct', 'uses'=>'User\UserController@getSingleProduct']);
 Route::get('/product/{categoryId}/category', ['as'=>'getSubCategoryProduct', 'uses'=>'User\UserController@getSubCategoryProduct']);
+Route::get('/product/{productId}/cart', ['as'=>'addToCart', 'uses'=>'User\UserController@addToCart']);
 
  /**
  * admin route start here.....

@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\CategoryModel;
 use App\Model\Admin\ProductModel;
+use URL;
 
 class UserController extends Controller {
 
@@ -17,16 +18,17 @@ class UserController extends Controller {
      */
     public function getUserDashboard() {
         $products = ProductModel::getProduct();
-        
+
         $categoryAndSubcategory = CategoryModel::getCategory();
-        
+
         return view('user.pages.dashboard')
-                ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                ->with('products', $products);
+                        ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                        ->with('products', $products);
 //        return view('user.pages.product')
 //                ->with('categoryAndSubcategory', $categoryAndSubcategory)
 //                ->with('products', $products);
     }
+
     /**
      * Display a single product page.
      *
@@ -36,14 +38,15 @@ class UserController extends Controller {
         $product = ProductModel::getProductById($productId);
         //dd($products);
         $categoryAndSubcategory = CategoryModel::getCategory();
-        
+
 //        return view('user.pages.dashboard')
 //                ->with('categoryAndSubcategory', $categoryAndSubcategory)
 //                ->with('products', $products);
         return view('user.pages.product')
-                ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                ->with('products', $product);
+                        ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                        ->with('products', $product);
     }
+
     /**
      * Display a single product page.
      *
@@ -51,12 +54,49 @@ class UserController extends Controller {
      */
     public function getSubCategoryProduct($categoryId) {
         $products = ProductModel::getProductBySubCategoryId($categoryId);
-        dd($products);
+        //dd(count($products));
+        //dd($products);
         $categoryAndSubcategory = CategoryModel::getCategory();
+        if (count($products) > 0) {
+            return view('user.pages.dashboard')
+                            ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                            ->with('products', $products);
+        } else {
+            return view('user.pages.category_empty')
+                            ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                            ->with('products', $products);
+        }
+    }
+
+    /**
+     * add to cart a single product page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addToCart($productId) {
+        $product = ProductModel::getProductById($productId);
+        //session_regenerate_id()
+        return session_regenerate_id();
         
-        return view('user.pages.product')
-                ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                ->with('products', $product);
+        return '<li>
+        <div class = "clearfix">
+        
+        <img class = "f_left m_right_10" src = " ' . URL::to('front_end_resource/images/shopping_c_img_1.jpg') . ' " alt = "">
+        <!--product description-->
+        <div class = "f_left product_description">
+        <a href = "#" class = "color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
+        <span class = "f_size_medium">Product Code PS34</span>
+        </div>
+        <!--product price-->
+        <div class = "f_left f_size_medium">
+        <div class = "clearfix">
+        1 x <b class = "color_dark">$99.00</b>
+        </div>
+        <button class = "close_product color_dark tr_hover"><i class = "fa fa-times"></i></button>
+        </div>
+        </div>
+        </li>';
+        //return "fdaf asdf as";
     }
 
     /**

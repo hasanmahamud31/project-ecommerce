@@ -15,3 +15,20 @@
 <script src="{{URL::to('front_end_resource/js/styleswitcher.js')}}"></script>
 <script src="{{URL::to('front_end_resource/js/scripts.js')}}"></script>
 <script type="text/javascript" src="../../s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5306f8f674bfda4c"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function ($) {
+
+    $('#add_to_cart').click('submit', function () {
+
+        $.get($(this).val(), function (data) {
+            $('.products_list').html(data);
+            alert(data);
+
+        });
+    });
+});
+
+</script>
+
+
