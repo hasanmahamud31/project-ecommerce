@@ -5,7 +5,7 @@ namespace App\Model\Admin;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Admin\CategoryModel;
 use App\Model\Admin\SubCategoryModel;
-use App\Modle\Admin\ProductModel;
+
 
 class SubCategoryModel extends Model {
     /**

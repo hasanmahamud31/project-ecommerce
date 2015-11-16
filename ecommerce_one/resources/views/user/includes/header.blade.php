@@ -115,11 +115,10 @@
                                                 <ul id="filter_portfolio" class="select_list d_none"></ul>
                                                 <select>
                                                     <option data-filter="*" value="All">All</option>
-                                                    <option data-filter=".fashion" value="Fashion">Fashion</option>
-                                                    <option data-filter=".portraits" value="Portraits">Portraits</option>
-                                                    <option data-filter=".people" value="People">People</option>
-                                                    <option data-filter=".cities" value="Cities">Cities</option>
-                                                    <option data-filter=".nature" value="Nature">Nature</option>
+                                                    @foreach ($categoryAndSubcategory as $category)
+                                                    <option data-filter=".fashion" value="{{ $category['value'] }}">{{ $category['name'] }}</option>
+                                                    @endforeach
+
                                                 </select>
                                             </div>
 

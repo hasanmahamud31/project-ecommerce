@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Admin\CategoryModel;
 use App\Model\Admin\SubCategoryModel;
 
+
 class CategoryModel extends Model {
 
     protected $table = 'category';
@@ -34,11 +35,20 @@ class CategoryModel extends Model {
     }
 
     /**
+     * shows relation between Category and subCategory
      * 
      * @return type collection
      */
     public function subCategory() {
         return $this->hasMany('App\Model\Admin\SubCategoryModel', 'category_id');
+    }
+    /**
+     * shows relation between Category and Product
+     * 
+     * @return type collection
+     */
+    public function product() {
+        return $this->hasMany('App\Modle\Admin\ProductModel', 'category_id');
     }
 
 }

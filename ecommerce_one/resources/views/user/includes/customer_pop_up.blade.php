@@ -1,4 +1,5 @@
-<div class="popup_wrap d_none" id="quick_view_product">
+@foreach ($products as $product)
+<div class="popup_wrap d_none" id="quick_view_product{{ $product['id'] }}">
     <section class="popup r_corners shadow">
         <button class="bg_tr color_dark tr_all_hover text_cs_hover close f_size_large"><i class="fa fa-times"></i></button>
         <div class="clearfix">
@@ -43,7 +44,7 @@
                 <!--right popup column-->
                 <div class="f_right half_column">
                     <!--description-->
-                    <h2 class="m_bottom_10"><a href="#" class="color_dark fw_medium">Eget elementum vel</a></h2>
+                    <h2 class="m_bottom_10"><a href="#" class="color_dark fw_medium">{{ $product['product_name'] }}</a></h2>
                     <div class="m_bottom_10">
                         <!--rating-->
                         <ul class="horizontal_list d_inline_middle type_2 clearfix rating_list tr_all_hover">
@@ -74,7 +75,7 @@
                     <table class="description_table m_bottom_10">
                         <tr>
                             <td>Manufacturer:</td>
-                            <td><a href="#" class="color_dark">Chanel</a></td>
+                            <td><a href="#" class="color_dark">{{$product['brand_name']}}</a></td>
                         </tr>
                         <tr>
                             <td>Availability:</td>
@@ -100,7 +101,7 @@
                     <p class="m_bottom_10">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem ipsum dolor sit amet, consecvtetuer adipiscing elit. </p>
                     <hr class="divider_type_3 m_bottom_15">
                     <div class="m_bottom_15">
-                        <s class="v_align_b f_size_ex_large">$152.00</s><span class="v_align_b f_size_big m_left_5 scheme_color fw_medium">$102.00</span>
+                        <s class="v_align_b f_size_ex_large">$152.00</s><span class="v_align_b f_size_big m_left_5 scheme_color fw_medium">TK. {{ $product['product_price'] }}</span>
                     </div>
                     <table class="description_table type_2 m_bottom_15">
                         <tr>
@@ -139,3 +140,4 @@
         </div>
     </section>
 </div>
+@endforeach

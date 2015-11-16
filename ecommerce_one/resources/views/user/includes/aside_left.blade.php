@@ -52,7 +52,7 @@
                     <ul class="d_none">
                         @foreach ($category->subCategory as $subCate)
                         <li>
-                            <a href="#" class="d_block f_size_large color_dark relative">
+                            <a href="{{route('getSubCategoryProduct', [ 'categoryId' => $subCate['id'] ])}}" class="d_block f_size_large color_dark relative">
                                 {{$subCate['sub_name']}}
                                 <!--<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>-->
                             </a>

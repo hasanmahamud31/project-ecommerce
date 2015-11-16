@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\CategoryModel;
+use App\Model\Admin\ProductModel;
 
 class UserController extends Controller {
 
@@ -15,9 +16,47 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function getUserDashboard() {
+        $products = ProductModel::getProduct();
+        
         $categoryAndSubcategory = CategoryModel::getCategory();
         
-        return view('user.pages.dashboard')->with('categoryAndSubcategory', $categoryAndSubcategory);
+        return view('user.pages.dashboard')
+                ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                ->with('products', $products);
+//        return view('user.pages.product')
+//                ->with('categoryAndSubcategory', $categoryAndSubcategory)
+//                ->with('products', $products);
+    }
+    /**
+     * Display a single product page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSingleProduct($productId) {
+        $product = ProductModel::getProductById($productId);
+        //dd($products);
+        $categoryAndSubcategory = CategoryModel::getCategory();
+        
+//        return view('user.pages.dashboard')
+//                ->with('categoryAndSubcategory', $categoryAndSubcategory)
+//                ->with('products', $products);
+        return view('user.pages.product')
+                ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                ->with('products', $product);
+    }
+    /**
+     * Display a single product page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSubCategoryProduct($categoryId) {
+        $products = ProductModel::getProductBySubCategoryId($categoryId);
+        dd($products);
+        $categoryAndSubcategory = CategoryModel::getCategory();
+        
+        return view('user.pages.product')
+                ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                ->with('products', $product);
     }
 
     /**
