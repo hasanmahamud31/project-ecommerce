@@ -1,5 +1,4 @@
 
-
 @extends('user.master.master')
 @section('main_content')
 <section class="col-lg-9 col-md-9 col-sm-9">
@@ -7,6 +6,7 @@
     <!--products-->
     <section class="products_container a_type_2 category_grid clearfix m_bottom_25">
         <!--product item-->
+        @foreach ($products as $product)
         <div class="product_item hit w_xs_full">
             <figure class="r_corners photoframe animate_ftb type_2 t_align_c tr_all_hover shadow relative">
                 <!--product preview-->
@@ -14,11 +14,11 @@
                     <!--hot product-->
                     <span class="hot_stripe"><img src="{{URL::to('front_end_resource/images/hot_product.png')}}" alt=""></span>
                     <img src="{{URL::to('front_end_resource/images/product_img_1.jpg')}}" class="tr_all_hover" alt="">
-                    <span role="button" data-popup="#quick_view_product" class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
+                    <span role="button" data-popup="#quick_view_product{{ $product['id'] }}" class="button_type_5 box_s_none color_light r_corners tr_all_hover d_xs_none">Quick View</span>
                 </a>
                 <!--description and price of product-->
                 <figcaption>
-                    <h5 class="m_bottom_10"><a href="#" class="color_dark">Eget elementum vel</a></h5>
+                    <h5 class="m_bottom_10"><a href="{{route('singleProduct', ['productId' => $product['id']])}}" class="color_dark">{{ $product['product_name'] }}</a></h5>
                     <!--rating-->
                     <ul class="horizontal_list d_inline_b m_bottom_10 clearfix rating_list type_2 tr_all_hover">
                         <li class="active">
@@ -42,7 +42,7 @@
                             <i class="fa fa-star active tr_all_hover"></i>
                         </li>
                     </ul>
-                    <p class="scheme_color f_size_large m_bottom_15">$102.00</p>	
+                    <p class="scheme_color f_size_large m_bottom_15">TK. {{ $product['product_price'] }}</p>	
                     <button class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15">Add to Cart</button>
                     <div class="clearfix m_bottom_5">
                         <ul class="horizontal_list d_inline_b l_width_divider">
@@ -53,6 +53,7 @@
                 </figcaption>
             </figure>
         </div>
+         @endforeach
         <!--product item-->
         <div class="product_item featured w_xs_full">
             <figure class="r_corners photoframe animate_ftb long type_2 t_align_c shadow relative">

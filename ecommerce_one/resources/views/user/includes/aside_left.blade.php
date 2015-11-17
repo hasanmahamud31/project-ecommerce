@@ -6,19 +6,21 @@
         </figcaption>
         <div class="widget_content">
             <!--Categories list-->
+            
+            
             <ul class="categories_list">
-                <li class="active">
+<!--                <li class="active">
                     <a href="#" class="f_size_large scheme_color d_block relative">
                         <b>Women</b>
                         <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
                     </a>
-                    <!--second level-->
+                    second level
                     <ul>
                         <li class="active">
                             <a href="#" class="d_block f_size_large color_dark relative">
                                 Dresses<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
                             </a>
-                            <!--third level-->
+                            third level
                             <ul>
                                 <li><a href="#" class="color_dark d_block">Evening Dresses</a></li>
                                 <li><a href="#" class="color_dark d_block">Casual Dresses</a></li>
@@ -36,33 +38,42 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
+
+
+                @foreach ($categoryAndSubcategory as $category)
                 <li>
                     <a href="#" class="f_size_large color_dark d_block relative">
-                        <b>Men</b>
+                        <b>{{ $category['name'] }}</b>
                         <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
                     </a>
                     <!--second level-->
+                    
                     <ul class="d_none">
+                        @foreach ($category->subCategory as $subCate)
                         <li>
-                            <a href="#" class="d_block f_size_large color_dark relative">
-                                Shorts<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
+                            <a href="{{route('getSubCategoryProduct', [ 'categoryId' => $subCate['id'] ])}}" class="d_block f_size_large color_dark relative">
+                                {{$subCate['sub_name']}}
+                                <!--<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>-->
                             </a>
                             <!--third level-->
-                            <ul class="d_none">
+<!--                            <ul class="d_none">
                                 <li><a href="#" class="color_dark d_block">Evening</a></li>
                                 <li><a href="#" class="color_dark d_block">Casual</a></li>
                                 <li><a href="#" class="color_dark d_block">Party</a></li>
-                            </ul>
+                            </ul>-->
                         </li>
+                        @endforeach
                     </ul>
+                    
                 </li>
-                <li>
+                @endforeach
+<!--                <li>
                     <a href="#" class="f_size_large color_dark d_block relative">
                         <b>Kids</b>
                         <span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
                     </a>
-                </li>
+                </li>-->
             </ul>
         </div>
     </figure>

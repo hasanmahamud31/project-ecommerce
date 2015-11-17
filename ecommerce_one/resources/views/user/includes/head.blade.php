@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <link rel="icon" type="image/ico" href="{{URL::to('front_end_resource/images/fav.ico')}}">
     <!--stylesheet include-->
+    <link rel="stylesheet" type="text/css" media="all" href="{{URL::to('front_end_resource/css/jquery.fancybox-1.3.4.css')}}">
     <link rel="stylesheet" type="text/css" media="all" href="{{URL::to('front_end_resource/css/colorpicker.css')}}">
     <link rel="stylesheet" type="text/css" media="all" href="{{URL::to('front_end_resource/css/flexslider.css')}}">
     <link rel="stylesheet" type="text/css" media="all" href="{{URL::to('front_end_resource/css/bootstrap.min.css')}}">
