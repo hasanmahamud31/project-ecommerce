@@ -22,8 +22,9 @@ jQuery(document).ready(function ($) {
     $('#add_to_cart').click('submit', function () {
 
         $.get($(this).val(), function (data) {
+            alert($(this).val());
             $('.products_list').html(data);
-            alert(data);
+            //alert(data);
 
         });
     });

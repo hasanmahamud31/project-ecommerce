@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\CategoryModel;
 use App\Model\Admin\ProductModel;
+use App\Model\User\Session;
 use URL;
 
 class UserController extends Controller {
@@ -36,7 +37,7 @@ class UserController extends Controller {
      */
     public function getSingleProduct($productId) {
         $product = ProductModel::getProductById($productId);
-        //dd($products);
+        
         $categoryAndSubcategory = CategoryModel::getCategory();
 
 //        return view('user.pages.dashboard')
@@ -74,29 +75,25 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function addToCart($productId) {
-        $product = ProductModel::getProductById($productId);
+        $products = ProductModel::getProductById($productId);
+        $categoryAndSubcategory = CategoryModel::getCategory();
         //session_regenerate_id()
-        dd(session_regenerate_id());
+      //$request = new Requests();
+        //dd(session_regenerate_id());
+         $session_array = array(
+             'payload'             => $products['id'],
+                               
+                );
+       Session::addToCart($session_array);
+       
+        session()->put('id', $products['id']);
+        session()->put('product_price', $products['product_price']);
+        session()->put('product_name', $products['product_name']);
         
-        return '<li>
-        <div class = "clearfix">
+        return back()
+                ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                ->with('products', $products);
         
-        <img class = "f_left m_right_10" src = " ' . URL::to('front_end_resource/images/shopping_c_img_1.jpg') . ' " alt = "">
-        <!--product description-->
-        <div class = "f_left product_description">
-        <a href = "#" class = "color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
-        <span class = "f_size_medium">Product Code PS34</span>
-        </div>
-        <!--product price-->
-        <div class = "f_left f_size_medium">
-        <div class = "clearfix">
-        1 x <b class = "color_dark">$99.00</b>
-        </div>
-        <button class = "close_product color_dark tr_hover"><i class = "fa fa-times"></i></button>
-        </div>
-        </div>
-        </li>';
-        //return "fdaf asdf as";
     }
 
     /**

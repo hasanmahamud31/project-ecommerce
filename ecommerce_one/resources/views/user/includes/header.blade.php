@@ -157,24 +157,26 @@
                         <div class="shopping_cart top_arrow tr_all_hover r_corners">
                             <div class="f_size_medium sc_header">Recently added item(s)</div>
                             <ul class="products_list">
+                                @foreach(session()->all() as $session)
                                 <li>
                                     <div class="clearfix">
                                         <!--product image-->
                                         <img class="f_left m_right_10" src="{{URL::to('front_end_resource/images/shopping_c_img_1.jpg')}}" alt="">
                                         <!--product description-->
                                         <div class="f_left product_description">
-                                            <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
-                                            <span class="f_size_medium">Product Code PS34</span>
+                                            <a href="#" class="color_dark m_bottom_5 d_block">{{ session('product_name') }}</a>
+                                            <span class="f_size_medium">{{session('id')}}</span>
                                         </div>
                                         <!--product price-->
                                         <div class="f_left f_size_medium">
                                             <div class="clearfix">
-                                                1 x <b class="color_dark">$99.00</b>
+                                                1 x <b class="color_dark">{{session('product_price')}}</b>
                                             </div>
                                             <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
                                 </li>
+                                @endforeach
                                 <li>
                                     <div class="clearfix">
                                         <!--product image-->
