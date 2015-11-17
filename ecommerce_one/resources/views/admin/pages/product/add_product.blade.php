@@ -45,7 +45,7 @@
                     <!-- select -->
                     <div class="form-group">
                         <label>Select Category</label>
-                        <select class="form-control" name="category_id" required>
+                        <select class="form-control" name="category_id" id="category_id">
                             <?php foreach ($cat as $data) { ?>
                                 <option value="<?php echo $data['id'] ?>"><?php echo $data['name'] ?></option>
                             <?php } ?>
@@ -54,7 +54,7 @@
                     <!-- select -->
                     <div class="form-group">
                         <label>Select Sub Category</label>
-                        <select class="form-control" name="subcategory_id" required>
+                        <select class="form-control" name="subcategory_id" id="subcategory_id" required>
                             <?php foreach ($subcat as $data) { ?>
                                 <option value="<?php echo $data['id'] ?>"><?php echo $data['sub_name'] ?></option>
                             <?php } ?>
@@ -89,20 +89,9 @@
                     
                     <div class="form-group">
                         <label for="exampleInputFile1">File input</label>
-                        <input type="file" name="photo1" id="exampleInputFile1">
+                        <input type="file" name="image1" id="exampleInputFile1">
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" name="photo2" id="exampleInputFile">                       
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" name="photo3" id="exampleInputFile">                        
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" name="photo4" id="exampleInputFile">                        
-                    </div>
+                  
 
                 </div><!-- /.box-body -->
 

@@ -25,6 +25,13 @@ Route::get('/admin','Auth\AuthController@getLogin');
 Route::get('auth/login','Auth\AuthController@getLogin');
 Route::post('/admin', 'Auth\AuthController@postLogin');
 
+Route::get('/home', function () {
+    if (Auth::guest()) {
+        return Redirect::to('/admin');
+    } else {
+        return Redirect::to('/dashboard');
+    }
+});
 
 
 Route::get('/dashboard', function () {
@@ -99,6 +106,7 @@ Route::get('subcategory_delete/{id}',['as'=>'delete_subcategory','uses'=>'SubCat
 
 //product route start from here.......................
 Route::get('product_view',['as'=>'product_view', 'uses'=>'ProductController@index']);
+Route::get('ajax_search_subcategory/{id}',['as'=>'ajax_search_subcategory', 'uses'=>'ProductController@ajax_search_subcategory']);
 Route::get('add_product_form',['as'=>'add_product_form', 'uses'=>'ProductController@create']);
 Route::post('store_Product',['as'=>'store_product', 'uses'=>'ProductController@store']);
 Route::get('/product_status/{id}',['as'=>'product_status','uses'=>'ProductController@show'])->where(['id' => '[0-9]+']);

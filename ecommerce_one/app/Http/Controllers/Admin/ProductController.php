@@ -12,6 +12,7 @@ use App\Model\Admin\ProdcutImageModel;
 use Auth;
 use Validator;
 use DB;
+use Input;
 
 class ProductController extends Controller {
 
@@ -29,7 +30,14 @@ class ProductController extends Controller {
 //     dd($data);
         return view('admin.pages.product.product_manage')->with('data', $data);
     }
-
+  public function ajax_search_subcategory($id) {
+        $id = $_GET['id'];
+        $data=SubCategoryModel::where('category_id',$id)->get();
+         echo '<option value=" ">Select Status.....</option>';
+         foreach ($data as $row) {
+            echo "<option value=" . $row['id'] . ">" . $row['sub_name'] . "</option>";
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -53,16 +61,13 @@ class ProductController extends Controller {
         $admin = Auth::User();
         $data = $request->all();
         $validator = Validator::make($data, [
-                    'sku' => 'required|unique:product',
+                    'sku' => 'required|unique:product,sku',
                     'category_id' => 'required',
                     'subcategory_id' => 'required',
                     'product_name' => 'required',
                     'brand_name' => 'required',
                     'product_price' => 'required',
-                    'photo1' => 'required|image|unique:product_image,image_path',
-                    'photo2' => 'required|image|unique:product_image,image_path',
-                    'photo3' => 'image|unique:product_image,image_path',
-                    'photo4' => 'image|unique:product_image,image_path',
+                    'image1' => 'required|image',
         ]);
 
         if ($validator->fails()) {
@@ -82,41 +87,20 @@ class ProductController extends Controller {
                         'product_price' => $data['product_price'],
                         'status' => 1,
             ]);
-            if ($request->hasFile('photo1')->isValid()->move($destinationPath)) {
-                ProdcutImageModel::create([
-                    'product_id' => $pro_id->id,
-                    'product_id' => $destinationPath,
-                    'status' => 1,
-                ]);
+
+            if (Input::file('image1')) {
+                $image = Input::file('image1');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = 'product_images/';
+                $request->file('image1')->move($path,$filename);
+                $image_path=$path.$filename;
             }
-            if ($request->hasFile('photo1')->isValid()->move($destinationPath)) {
-                ProdcutImageModel::create([
-                    'product_id' => $pro_id->id,
-                    'product_id' => $destinationPath,
-                    'status' => 1,
-                ]);
-            }
-            if ($request->hasFile('photo2')->isValid()->move($destinationPath)) {
-                ProdcutImageModel::create([
-                    'product_id' => $pro_id->id,
-                    'product_id' => $destinationPath,
-                    'status' => 1,
-                ]);
-            }
-            if ($request->hasFile('photo3')->isValid()->move($destinationPath)) {
-                ProdcutImageModel::create([
-                    'product_id' => $pro_id->id,
-                    'product_id' => $destinationPath,
-                    'status' => 1,
-                ]);
-            }
-            if ($request->hasFile('photo4')->isValid()->move($destinationPath)) {
-                ProdcutImageModel::create([
-                    'product_id' => $pro_id->id,
-                    'product_id' => $destinationPath,
-                    'status' => 1,
-                ]);
-            }
+            ProdcutImageModel::create([
+                        'product_id' => $pro_id->id,
+                        'image_path' => $image_path,
+                        'status' => 1,
+            ]);
+            return redirect()->route('add_product_form')->with('message', 'status change successfully.....');
         }
     }
 
@@ -162,8 +146,9 @@ class ProductController extends Controller {
     public function edit($id) {
         $data = ProductModel::where('id', $id)->get();
         $category_info = CategoryModel::where('status', 1)->get();
+        $subcat = SubCategoryModel::where('status', 1)->get();
         // dd($data);
-        return view('admin.pages.product.product_edit')->with('data', $data)->with('category_info', $category_info);
+        return view('admin.pages.product.product_edit')->with('data', $data)->with('category_info', $category_info)->with('subcat', $subcat);
     }
 
     /**
