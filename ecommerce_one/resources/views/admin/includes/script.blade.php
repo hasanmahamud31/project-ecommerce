@@ -25,4 +25,20 @@
 <!-- AdminLTE App -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{URL::to('admin_resource/js/AdminLTE/dashboard.js')}}" type="text/javascript"></script>
-
+<?php
+Route::get('ajax_search_subcategory/{id}',['as'=>'ajax_search_subcategory', 'uses'=>'ProductController@ajax_search_subcategory']);
+?>
+<script>
+$("#category_id").change(function () {
+    var data = this.value;  
+        $.ajax({
+            url: 'ajax_search_subcategory/{id}',
+            type: 'GET',
+            data: {id: this.value},
+            success: function (response)
+            {
+                $('#subcategory_id').html(response);
+            }
+        });
+});
+</script>

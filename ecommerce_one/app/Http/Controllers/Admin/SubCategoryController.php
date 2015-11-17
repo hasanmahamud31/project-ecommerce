@@ -26,6 +26,7 @@ class SubCategoryController extends Controller {
 //     dd($data);
         return view('admin.pages.subcategory.subcategory_manage')->with('data', $data);
     }
+  
 
     /**
      * Show the form for creating a new resource.

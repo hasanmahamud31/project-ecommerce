@@ -28,7 +28,7 @@
         <!--         script start from here    -->
         @include('admin.includes.script')
         <!--         script end from here   -->
-    </boy>
+    </body>
 </html>
 
 
