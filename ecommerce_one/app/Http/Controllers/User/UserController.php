@@ -76,7 +76,7 @@ class UserController extends Controller {
     public function addToCart($productId) {
         $product = ProductModel::getProductById($productId);
         //session_regenerate_id()
-        return session_regenerate_id();
+        dd(session_regenerate_id());
         
         return '<li>
         <div class = "clearfix">
