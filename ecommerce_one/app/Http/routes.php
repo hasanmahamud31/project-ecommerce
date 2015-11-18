@@ -113,8 +113,11 @@ Route::get('/product_status/{id}',['as'=>'product_status','uses'=>'ProductContro
 Route::get('product_edit/{id}',['as'=>'edit_product','uses'=>'ProductController@edit'])->where(['id' => '[0-9]+']);
 Route::post('product_update/{id}',['as'=>'update_product','uses'=>'ProductController@update'])->where(['id' => '[0-9]+']);
 Route::get('product_delete/{id}',['as'=>'delete_product','uses'=>'ProductController@destroy'])->where(['id' => '[0-9]+']);
-
-
+//image add,edit,delete, update from here.....
+Route::get('view_product_image/{id}',['as'=>'view_product_image','uses'=>'ProductController@view_product_image'])->where(['id' => '[0-9]+']);
+Route::get('/product_image_status/{id}',['as'=>'product_image_status','uses'=>'ProductController@product_image_status'])->where(['id' => '[0-9]+']);
+Route::post('store_product_image',['as'=>'store_product_image', 'uses'=>'ProductController@store_image']);
+Route::get('add_image_form/{id}',['as'=>'add_image_form', 'uses'=>'ProductController@add_product_image']);
 
 });
 });

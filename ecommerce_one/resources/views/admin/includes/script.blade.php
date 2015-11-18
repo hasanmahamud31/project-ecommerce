@@ -1,5 +1,5 @@
 <!-- jQuery 2.0.2 -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="{{URL::to('admin_resource/js/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.10.3 -->
 <!--<script src="{{URL::to('../admin_resource/js/jquery-ui-1.10.3.min.js')}}" type="text/javascript"></script>-->
 <!-- Bootstrap -->
@@ -26,13 +26,13 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{URL::to('admin_resource/js/AdminLTE/dashboard.js')}}" type="text/javascript"></script>
 <?php
-Route::get('ajax_search_subcategory/{id}',['as'=>'ajax_search_subcategory', 'uses'=>'ProductController@ajax_search_subcategory']);
+Route::get('ajax_search_subcategory',['as'=>'ajax_search_subcategory', 'uses'=>'ProductController@ajax_search_subcategory']);
 ?>
 <script>
-$("#category_id").change(function () {
-    var data = this.value;  
+$("#category_id").change(function () {  
+     
         $.ajax({
-            url: 'ajax_search_subcategory/{id}',
+            url: 'ajax_search_subcategory',
             type: 'GET',
             data: {id: this.value},
             success: function (response)

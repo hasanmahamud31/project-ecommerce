@@ -30,14 +30,16 @@ class ProductController extends Controller {
 //     dd($data);
         return view('admin.pages.product.product_manage')->with('data', $data);
     }
-  public function ajax_search_subcategory($id) {
+
+    public function ajax_search_subcategory() {
         $id = $_GET['id'];
-        $data=SubCategoryModel::where('category_id',$id)->get();
-         echo '<option value=" ">Select Status.....</option>';
-         foreach ($data as $row) {
+        $data = SubCategoryModel::where('category_id', $id)->get();
+        echo '<option value=" ">Select Sub Category..</option>';
+        foreach ($data as $row) {
             echo "<option value=" . $row['id'] . ">" . $row['sub_name'] . "</option>";
         }
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -88,18 +90,62 @@ class ProductController extends Controller {
                         'status' => 1,
             ]);
 
+            //image one start here..........
             if (Input::file('image1')) {
                 $image = Input::file('image1');
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $path = 'product_images/';
-                $request->file('image1')->move($path,$filename);
-                $image_path=$path.$filename;
+                $request->file('image1')->move($path, $filename);
+                $image_path = $path . $filename;
             }
             ProdcutImageModel::create([
-                        'product_id' => $pro_id->id,
-                        'image_path' => $image_path,
-                        'status' => 1,
+                'product_id' => $pro_id->id,
+                'image_path' => $image_path,
+                'status' => 1,
             ]);
+            //image one end heree.............
+            //image two start  heree.............
+            if (Input::file('image2')) {
+                $image = Input::file('image2');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = 'product_images/';
+                $request->file('image2')->move($path, $filename);
+                $image_path = $path . $filename;
+            }
+            ProdcutImageModel::create([
+                'product_id' => $pro_id->id,
+                'image_path' => $image_path,
+                'status' => 1,
+            ]);
+            //imagee two end here........
+            //imagee three start here........
+            if (Input::file('image3')) {
+                $image = Input::file('image3');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = 'product_images/';
+                $request->file('image3')->move($path, $filename);
+                $image_path = $path . $filename;
+            }
+            ProdcutImageModel::create([
+                'product_id' => $pro_id->id,
+                'image_path' => $image_path,
+                'status' => 1,
+            ]);
+            //image three end here........
+            //image four end here........
+            if (Input::file('image4')) {
+                $image = Input::file('image4');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $path = 'product_images/';
+                $request->file('image4')->move($path, $filename);
+                $image_path = $path . $filename;
+            }
+            ProdcutImageModel::create([
+                'product_id' => $pro_id->id,
+                'image_path' => $image_path,
+                'status' => 1,
+            ]);
+            //image four end here........
             return redirect()->route('add_product_form')->with('message', 'status change successfully.....');
         }
     }
@@ -145,10 +191,10 @@ class ProductController extends Controller {
      */
     public function edit($id) {
         $data = ProductModel::where('id', $id)->get();
-        $category_info = CategoryModel::where('status', 1)->get();
+        $cat = CategoryModel::where('status', 1)->get();
         $subcat = SubCategoryModel::where('status', 1)->get();
         // dd($data);
-        return view('admin.pages.product.product_edit')->with('data', $data)->with('category_info', $category_info)->with('subcat', $subcat);
+        return view('admin.pages.product.product_edit')->with('data', $data)->with('cat', $cat)->with('subcat', $subcat);
     }
 
     /**
@@ -177,4 +223,33 @@ class ProductController extends Controller {
         return redirect()->route('product_view')->with('message', 'product data delete successfully.....');
     }
 
+    //image add ,edit, delete,update start from here......
+    //image add ,edit, delete,update start from here......
+    //image add ,edit, delete,update start from here......
+    public function view_product_image($id) {
+        $data = ProdcutImageModel::where('product_id', $id)->get();
+        return view('admin.pages.product.product_image_manage')
+                ->with('data', $data)
+                ->with('product_id', $id);
+    }
+
+    public function product_image_status($id) {
+//        dd($id);
+        $data = ProdcutImageModel::findOrfail($id);
+        if ($data->status == 0) {
+            ProdcutImageModel::where('id', $id)->update(['status' => 1]);
+            return back()->with('message', 'status change successfully.....');
+        } elseif ($data->status == 1) {
+            ProdcutImageModel::where('id', $id)->update(['status' => 0]);
+            return back()->with('message', 'status change successfully.....');
+        }
+    }
+    
+      public function add_product_image($id) {
+        return view('admin.pages.product.image_add')
+                ->with('id', $id);
+    }
+      public function store_image() {
+       echo $id;
+    }
 }

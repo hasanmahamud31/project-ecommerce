@@ -40,12 +40,12 @@
                             <div class="box">
                                 <div class="box-header">
                                     <div class="pull-left"> 
-                                        <h3 class="box-title">Manage Category</h3>
+                                        <h3 class="box-title">Manage Product Image</h3>
 
                                     </div>
                                     <div class="pull-right">
                                         <ul style="list-style: none">
-                                            <li><a href="{{route('add_product_form')}}"><button class="btn btn-danger">Add product</button></a></li>
+                                            <li><a href="{{route('add_image_form',['id'=>$product_id])}}"><button class="btn btn-danger">Add Image</button></a></li>
                                         </ul>
                                     </div>
 
@@ -64,39 +64,32 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Product Name</th>
-                                                <th>Price</th>
-                                                <th>SKU</th>
+                                                <th>Product id</th>
+                                                <th>Image</th>
                                                 <th>status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($data as $product)
+                                            @foreach($data as $image)
                                             <tr>
 
 
-                                                <td>{{$product->id}}</td>
-                                                <td>{{$product->product_name}}</td>
-                                                <td>{{$product->product_price}}</td>
-                                                <td>{{$product->sku}}</td>
+                                                <td>{{$image->id}}</td>
+                                                <td>{{$image->product_id}}</td>
+                                                <td><img height="50" width="80" src="{{url($image->image_path)}}"></td>
                                                 <td style="text-align: center">
 
-                                                    @if($product->status=='1')
-                                                    <a href="{{route('product_status',['id'=>$product->id])}}"><small class="badge bg-green">Active</small></a>
+                                                    @if($image->status=='1')
+                                                    <a href="{{route('product_image_status',['id'=>$image->id])}}"><small class="badge bg-green">Active</small></a>
                                                     @else
-                                                    <a href="{{route('product_status',['id'=>$product->id])}}"><small class="badge bg-red">Inactive</small></a>
+                                                    <a href="{{route('product_image_status',['id'=>$image->id])}}"><small class="badge bg-red">Inactive</small></a>
 
                                                     @endif
                                                 </td>
 
                                                 <td class="center">
-                                                    <a href="{{route('edit_product',['id'=>$product->id])}}"> <button class="btn btn-edit btn-sm" data-widget='collapse' data-toggle="tooltip" title="Edit Profile"><i class="fa fa-edit"></i></button></a>
-                                                    <a href="{{route('view_product_image',['id'=>$product->id])}}"> <button class="btn btn-danger btn-sm" data-widget='edit' data-toggle="tooltip" title="view image"><i class="fa fa-pencil fa-fw"></i></button></a>
-
-
-                                                    <a href="{{route('delete_product',['id'=>$product->id])}}"> <button class="btn btn-danger btn-sm" data-widget='remove' data-toggle="tooltip" title="Remove product"><i class="fa fa-times"></i></button></a>
-
+                                                    <a href="#"> <button class="btn btn-edit btn-sm" data-widget='collapse' data-toggle="tooltip" title="Edit Profile"><i class="fa fa-edit"></i></button></a>                                
                                                 </td>
 
                                             </tr

@@ -45,7 +45,7 @@
                     <!-- select -->
                     <div class="form-group">
                         <label>Select Category</label>
-                        <select class="form-control" name="category_id" id="category_id">
+                        <select class="form-control" name="category_id" id="category_id" required>
                             <?php foreach ($cat as $data) { ?>
                                 <option value="<?php echo $data['id'] ?>"><?php echo $data['name'] ?></option>
                             <?php } ?>
@@ -90,6 +90,18 @@
                     <div class="form-group">
                         <label for="exampleInputFile1">File input</label>
                         <input type="file" name="image1" id="exampleInputFile1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile2">File input</label>
+                        <input type="file" name="image2" id="exampleInputFile2">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile3">File input</label>
+                        <input type="file" name="image3" id="exampleInputFile3">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile4">File input</label>
+                        <input type="file" name="image4" id="exampleInputFile4">
                     </div>
                   
 
