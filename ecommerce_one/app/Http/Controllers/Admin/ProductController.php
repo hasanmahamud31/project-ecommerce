@@ -9,10 +9,13 @@ use App\Model\Admin\ProductModel;
 use App\Model\Admin\CategoryModel;
 use App\Model\Admin\SubCategoryModel;
 use App\Model\Admin\ProdcutImageModel;
+use App\Model\Admin\ProductSizeModel;
+use App\Model\Admin\ProductColorModel;
 use Auth;
 use Validator;
 use DB;
 use Input;
+use Storage;
 
 class ProductController extends Controller {
 
@@ -229,8 +232,8 @@ class ProductController extends Controller {
     public function view_product_image($id) {
         $data = ProdcutImageModel::where('product_id', $id)->get();
         return view('admin.pages.product.product_image_manage')
-                ->with('data', $data)
-                ->with('product_id', $id);
+                        ->with('data', $data)
+                        ->with('product_id', $id);
     }
 
     public function product_image_status($id) {
@@ -244,12 +247,151 @@ class ProductController extends Controller {
             return back()->with('message', 'status change successfully.....');
         }
     }
-    
-      public function add_product_image($id) {
+
+    public function add_product_image($id) {
         return view('admin.pages.product.image_add')
-                ->with('id', $id);
+                        ->with('id', $id);
     }
-      public function store_image() {
-       echo $id;
+
+    public function store_image(Request $request) {
+        $data = $request->all();
+        if (Input::file('image')) {
+            $image = Input::file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = 'product_images/';
+            $request->file('image')->move($path, $filename);
+            $image_path = $path . $filename;
+        }
+        ProdcutImageModel::create([
+            'product_id' => $data['product_id'],
+            'image_path' => $image_path,
+            'status' => 1,
+        ]);
+        return back()->with('message', 'status change successfully.....');
     }
+
+    public function delete_image_product($id) {
+        $data = ProdcutImageModel::findOrfail($id);
+        // $base_path=base_path($data->image_path);
+        //$image_name=  basename($data->image_path);
+        //  dd($image_name);
+        // Storage::delete($image_name);
+        $data->delete($id);
+        return back()->with('message', 'Product Image successfully deleted..');
+    }
+
+    public function download_image_product($id) {
+        $data = ProdcutImageModel::findOrfail($id);
+        return response()->download($data->image_path);
+    }
+
+    //product size add ,edit, delete,update start from here......
+    //product size add ,edit, delete,update start from here......
+    //product size add ,edit, delete,update start from here......
+    public function view_product_size($id) {
+        $data = ProductSizeModel::where('product_id', $id)->get();
+        return view('admin.pages.product.product_size_manage')
+                        ->with('data', $data)
+                        ->with('product_id', $id);
+    }
+
+    public function product_size_status($id) {
+//        dd($id);
+        $data = ProductSizeModel::findOrfail($id);
+        if ($data->status == 0) {
+            ProductSizeModel::where('id', $id)->update(['status' => 1]);
+            return back()->with('message', 'status change successfully.....');
+        } elseif ($data->status == 1) {
+            ProductSizeModel::where('id', $id)->update(['status' => 0]);
+            return back()->with('message', 'status change successfully.....');
+        }
+    }
+
+    public function add_product_size($id) {
+        return view('admin.pages.product.size_add')
+                        ->with('id', $id);
+    }
+
+    public function store_size(Request $request) {
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+                    'size_name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/add_size_form')
+                            ->withInput()
+                            ->withErrors($validator);
+        } else {
+            ProductSizeModel::create([
+
+                        'product_id' => $data['product_id'],
+                        'size_name' => $data['size_name'],
+                        'status' => 1,
+            ]);
+            return back()->with('message', 'status change successfully.....');
+        }
+    }
+    public function delete_size_product($id) {
+        $data = ProductSizeModel::findOrfail($id);
+        $data->delete($id);
+        return back()->with('message', 'Product Image size successfully deleted..');
+    }
+    
+    
+    //product size add ,edit, delete,update start from here......
+    //product size add ,edit, delete,update start from here......
+    //product size add ,edit, delete,update start from here......
+    public function view_product_color($id) {
+        $data = ProductColorModel::where('product_id', $id)->get();
+        return view('admin.pages.product.product_color_manage')
+                        ->with('data', $data)
+                        ->with('product_id', $id);
+    }
+
+    public function product_color_status($id) {
+//        dd($id);
+        $data = ProductColorModel::findOrfail($id);
+        if ($data->status == 0) {
+            ProductColorModel::where('id', $id)->update(['status' => 1]);
+            return back()->with('message', 'status change successfully.....');
+        } elseif ($data->status == 1) {
+            ProductColorModel::where('id', $id)->update(['status' => 0]);
+            return back()->with('message', 'status change successfully.....');
+        }
+    }
+
+    public function add_product_color($id) {
+        return view('admin.pages.product.color_add')
+                        ->with('id', $id);
+    }
+
+    public function store_color(Request $request) {
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+                    'color_name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/add_color_form')
+                            ->withInput()
+                            ->withErrors($validator);
+        } else {
+            ProductColorModel::create([
+
+                        'product_id' => $data['product_id'],
+                        'color_name' => $data['color_name'],
+                        'status' => 1,
+            ]);
+            return back()->with('message', 'status change successfully.....');
+        }
+    }
+    public function delete_color_product($id) {
+        $data = ProductColorModel::findOrfail($id);
+        $data->delete($id);
+        return back()->with('message', 'Product color size successfully deleted..');
+    }
+
 }

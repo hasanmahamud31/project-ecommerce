@@ -118,6 +118,21 @@ Route::get('view_product_image/{id}',['as'=>'view_product_image','uses'=>'Produc
 Route::get('/product_image_status/{id}',['as'=>'product_image_status','uses'=>'ProductController@product_image_status'])->where(['id' => '[0-9]+']);
 Route::post('store_product_image',['as'=>'store_product_image', 'uses'=>'ProductController@store_image']);
 Route::get('add_image_form/{id}',['as'=>'add_image_form', 'uses'=>'ProductController@add_product_image']);
+Route::get('delete_image_product/{id}',['as'=>'delete_image_product', 'uses'=>'ProductController@delete_image_product']);
+Route::get('download_image_product/{id}',['as'=>'download_image_product', 'uses'=>'ProductController@download_image_product']);
+//product size add,edit,delete, update from here.....
+Route::get('view_product_size/{id}',['as'=>'view_product_size','uses'=>'ProductController@view_product_size'])->where(['id' => '[0-9]+']);
+Route::get('/product_size_status/{id}',['as'=>'product_size_status','uses'=>'ProductController@product_size_status'])->where(['id' => '[0-9]+']);
+Route::post('store_product_size',['as'=>'store_product_size', 'uses'=>'ProductController@store_size']);
+Route::get('add_size_form/{id}',['as'=>'add_size_form', 'uses'=>'ProductController@add_product_size']);
+Route::get('delete_size_product/{id}',['as'=>'delete_size_product', 'uses'=>'ProductController@delete_size_product']);
+//product color add,edit,delete, update from here.....
+Route::get('view_product_color/{id}',['as'=>'view_product_color','uses'=>'ProductController@view_product_color'])->where(['id' => '[0-9]+']);
+Route::get('/product_color_status/{id}',['as'=>'product_color_status','uses'=>'ProductController@product_color_status'])->where(['id' => '[0-9]+']);
+Route::post('store_product_color',['as'=>'store_product_color', 'uses'=>'ProductController@store_color']);
+Route::get('add_color_form/{id}',['as'=>'add_color_form', 'uses'=>'ProductController@add_product_color']);
+Route::get('delete_color_product/{id}',['as'=>'delete_color_product', 'uses'=>'ProductController@delete_color_product']);
+
 
 });
 });

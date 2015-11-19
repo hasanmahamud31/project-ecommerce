@@ -77,7 +77,7 @@
 
                                                 <td>{{$image->id}}</td>
                                                 <td>{{$image->product_id}}</td>
-                                                <td><img height="50" width="80" src="{{url($image->image_path)}}"></td>
+                                                <td><img height="50" width="50" src="{{url($image->image_path)}}"></td>
                                                 <td style="text-align: center">
 
                                                     @if($image->status=='1')
@@ -89,7 +89,9 @@
                                                 </td>
 
                                                 <td class="center">
-                                                    <a href="#"> <button class="btn btn-edit btn-sm" data-widget='collapse' data-toggle="tooltip" title="Edit Profile"><i class="fa fa-edit"></i></button></a>                                
+                                                                                    
+                                                    <a href="{{route('download_image_product',['id'=>$image->id])}}"> <button class="btn btn-edit btn-sm" data-widget='collapse' data-toggle="tooltip" title="downlaod image"><i class="fa fa-download"></i></button></a>                                
+                                                    <a href="{{route('delete_image_product',['id'=>$image->id])}}"> <button class="btn btn-danger btn-sm" data-widget='remove' data-toggle="tooltip" title="Remove image"><i class="fa fa-times"></i></button></a>
                                                 </td>
 
                                             </tr

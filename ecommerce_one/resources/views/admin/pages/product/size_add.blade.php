@@ -18,7 +18,7 @@
         <!-- general form elements start  -->
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Enter the Correct image </h3>
+                <h3 class="box-title">Enter the Correct size </h3>
             </div><!-- /.box-header -->
             @if (count($errors) > 0)
             <!-- Form Error List -->
@@ -39,21 +39,15 @@
                 @endif 
             </div> 
             <!-- form start -->
-            <form method="POST" role="form" action="{{route('store_product_image')}}" enctype="multipart/form-data">
+            <form method="POST" role="form" action="{{route('store_product_size')}}" >
                 {!! csrf_field() !!}
-                <div class="box-body">
-                    
+                <div class="box-body">               
                     <div class="form-group">
-                        <label for="exampleInputFile1">File input</label>
-                        <input type="file" name="image" id="exampleInputFile1">
-                        <input type="hidden" name="product_id" value="<?php echo $id;?>">
-                        
+                        <label for="exampleInputsize">Enter Size</label>
+                        <input type="text" name="size_name" id="exampleInputsize">
+                        <input type="hidden" name="product_id" value="<?php echo $id; ?>">                        
                     </div>
-                    
-                 
-
                 </div><!-- /.box-body -->
-
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
