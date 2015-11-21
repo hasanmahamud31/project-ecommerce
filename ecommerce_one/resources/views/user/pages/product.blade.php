@@ -90,6 +90,7 @@
             <div class="m_bottom_15">
                 <s class="v_align_b f_size_ex_large">$152.00</s><span class="v_align_b f_size_big m_left_5 scheme_color fw_medium">TK.{{ $products['product_price'] }}</span>
             </div>
+            
             <table class="description_table type_2 m_bottom_15">
                 <tr>
                     <td class="v_align_m">Size:</td>
@@ -116,6 +117,7 @@
                     </td>
                 </tr>
             </table>
+           
             <div class="d_ib_offset_0 m_bottom_20">
                 <a href="{{route('addToCart', ['id' => $products['id']])}}"><button class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large" id="add_to_cart" value="{{route('addToCart', ['id' => $products['id']])}}">Add to Cart</button></a>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Wishlist</span><i class="fa fa-heart-o f_size_big"></i></button>
