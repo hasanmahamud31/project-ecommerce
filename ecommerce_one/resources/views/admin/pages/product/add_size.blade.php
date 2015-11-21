@@ -89,19 +89,19 @@
                     
                     <div class="form-group">
                         <label for="exampleInputFile1">File input</label>
-                        <input type="file" name="image1" id="exampleInputFile1">
+                        <input type="file" name="size1" id="exampleInputFile1">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile2">File input</label>
-                        <input type="file" name="image2" id="exampleInputFile2">
+                        <input type="file" name="size2" id="exampleInputFile2">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile3">File input</label>
-                        <input type="file" name="image3" id="exampleInputFile3">
+                        <input type="file" name="size3" id="exampleInputFile3">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile4">File input</label>
-                        <input type="file" name="image4" id="exampleInputFile4">
+                        <input type="file" name="size4" id="exampleInputFile4">
                     </div>
                   
 

@@ -29,6 +29,7 @@ class ProductModel extends Model
      */
     public static function getProduct() {
         $products = ProductModel::where('status', '=', 1)->get();
+
         return $products;
     }
     /**

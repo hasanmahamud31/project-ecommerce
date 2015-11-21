@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <small>Register User Page</small>
+            <small>Register Product edit page..</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{URL::to('/deshboard')}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -33,20 +33,21 @@
 
             <!-- form start -->
             @foreach($data as $datam)
-            <form method="POST" name="edit" role="form" action="{{route('update_product',['id'=>$datam->id])}}">
+            <form method="POST" name="edit" role="form" action="{{route('update_product',['id'=>$datam->id])}}" enctype="multipart/form-data">
                 {!! csrf_field() !!}
                 <div class="box-body">
-                    <div class="form-group">
+                     <div class="form-group">
                         <label>Select Category</label>
-                        <select class="form-control" name="category_id"  required>
-                            <?php foreach ($category_info as $cat_info) { ?>
-                                <option value="<?php echo $cat_info['id'] ?>"><?php echo $cat_info['name'] ?></option>
+                        <select class="form-control" name="category_id" id="category_id" required>
+                            <?php foreach ($cat as $data) { ?>
+                                <option value="<?php echo $data['id'] ?>"><?php echo $data['name'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
+                    <!-- select -->
                     <div class="form-group">
                         <label>Select Sub Category</label>
-                        <select class="form-control" name="subcategory_id" required>
+                        <select class="form-control" id="subcategory_id" name="subcategory_id" required>
                             <?php foreach ($subcat as $data) { ?>
                                 <option value="<?php echo $data['id'] ?>"><?php echo $data['sub_name'] ?></option>
                             <?php } ?>
@@ -75,9 +76,7 @@
                     <div class="form-group">
                         <label for="product_price">product_price</label>
                         <input type="text" name="product_price" value="{{$datam->product_price}}" class="form-control" id="value"  placeholder="product_price">
-                    </div>     
-
-                              
+                    </div>                                  
                 </div><!-- /.box-body -->
 
                 <div class="box-footer">

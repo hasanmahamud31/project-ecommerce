@@ -51,38 +51,38 @@ class AdminAppSeeder extends Seeder {
         $this->command->info('user data inserted');
         
         App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'All Categories', 'value' => '0', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Antiques', 'value' => '20081', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Art', 'value' => '550', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Baby', 'value' => '2984', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Books', 'value' => '267', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Business &amp; Industrial', 'value' => '12576', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Antiques', 'value' => '20081', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Art', 'value' => '550', 'status' => '1'));
+        //App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Baby', 'value' => '2984', 'status' => '1'));
+       $books= App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Books', 'value' => '267', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Business &amp; Industrial', 'value' => '12576', 'status' => '1'));
         $camera=App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Cameras &amp; Photo', 'value' => '625', 'status' => '1'));
         $mobile=App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Cell Phones &amp; Accessories', 'value' => '15032', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Clothing, Shoes &amp; Accessories', 'value' => '11450', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Coins &amp; Paper Money', 'value' => '11116', 'status' => '1'));
+      //  App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Clothing, Shoes &amp; Accessories', 'value' => '11450', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Coins &amp; Paper Money', 'value' => '11116', 'status' => '1'));
         $computer=App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Computers/Tablets &amp; Networking', 'value' => '58058', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Consumer Electronics', 'value' => '293', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Crafts', 'value' => '14339', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Dolls &amp; Bears', 'value' => '237', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'DVDs &amp; Movies', 'value' => '11232', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Gift Cards &amp; Coupons', 'value' => '172008', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Health &amp; Beauty', 'value' => '26395', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Home &amp; Garden', 'value' => '11700', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Jewelry &amp; Watches', 'value' => '281', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Musical Instruments &amp; Gear', 'value' => '619', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Music', 'value' => '11233', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Pet Supplies', 'value' => '1281', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Pottery &amp; Glass', 'value' => '870', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Real Estate', 'value' => '10542', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Specialty Services', 'value' => '316', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Sporting Goods', 'value' => '888', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Sports Mem, Cards &amp; Fan Shop', 'value' => '64482', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Stamps', 'value' => '260', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Tickets &amp; Experiences', 'value' => '1305', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Toys &amp; Hobbies', 'value' => '220', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Travel', 'value' => '3252', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Video Games &amp; Consoles', 'value' => '1249', 'status' => '1'));
-        App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Everything Else', 'value' => '99', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Consumer Electronics', 'value' => '293', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Crafts', 'value' => '14339', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Dolls &amp; Bears', 'value' => '237', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'DVDs &amp; Movies', 'value' => '11232', 'status' => '1'));
+        //App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Gift Cards &amp; Coupons', 'value' => '172008', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Health &amp; Beauty', 'value' => '26395', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Home &amp; Garden', 'value' => '11700', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Jewelry &amp; Watches', 'value' => '281', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Musical Instruments &amp; Gear', 'value' => '619', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Music', 'value' => '11233', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Pet Supplies', 'value' => '1281', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Pottery &amp; Glass', 'value' => '870', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Real Estate', 'value' => '10542', 'status' => '1'));
+        //App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Specialty Services', 'value' => '316', 'status' => '1'));
+       $sports= App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Sporting Goods', 'value' => '888', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Sports Mem, Cards &amp; Fan Shop', 'value' => '64482', 'status' => '1'));
+        //App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Stamps', 'value' => '260', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin2->id, 'name' => 'Tickets &amp; Experiences', 'value' => '1305', 'status' => '1'));
+       $toys= App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Toys &amp; Hobbies', 'value' => '220', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin3->id, 'name' => 'Travel', 'value' => '3252', 'status' => '1'));
+       // App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Video Games &amp; Consoles', 'value' => '1249', 'status' => '1'));
+        //App\Model\Admin\CategoryModel::create(array('admin_id' => $admin1->id, 'name' => 'Everything Else', 'value' => '99', 'status' => '1'));
         $this->command->info('category inserted');
         
         
@@ -92,8 +92,17 @@ class AdminAppSeeder extends Seeder {
         $subcategory_idcamera=App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin2->id,'category_id' => $camera->id, 'sub_name' => 'Sony', 'value' => '1305', 'status' => '1'));
         App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin3->id,'category_id' => $camera->id, 'sub_name' => 'Canon', 'value' => '220', 'status' => '1'));
         App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin3->id,'category_id' => $camera->id, 'sub_name' => 'HTL', 'value' => '3252', 'status' => '1'));
-        App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin1->id,'category_id' => $computer->id,'sub_name' => 'Lg', 'value' => '1249', 'status' => '1'));
+        App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin1->id,'category_id' => $computer->id,'sub_name' => 'Toshiba', 'value' => '1249', 'status' => '1'));
         $subcategory_idcomputer=App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin1->id,'category_id' => $computer->id,'sub_name' => 'HP', 'value' => '99', 'status' => '1'));
+        
+        $books_sub=App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin1->id,'category_id' => $books->id, 'sub_name' => 'Programming language', 'value' => '1014', 'status' => '1'));
+        App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin2->id,'category_id' => $books->id, 'sub_name' => 'play','value' => '2014', 'status' => '1'));
+        App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin2->id,'category_id' => $books->id, 'sub_name' => 'Drama', 'value' => '3013', 'status' => '1'));
+        $sports_sub=App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin2->id,'category_id' => $sports->id, 'sub_name' => 'Cricket', 'value' => '1345', 'status' => '1'));
+        App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin3->id,'category_id' => $sports->id, 'sub_name' => 'Football', 'value' => '2205', 'status' => '1'));
+        App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin3->id,'category_id' => $sports->id, 'sub_name' => 'ha do do', 'value' => '32452', 'status' => '1'));
+        App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin1->id,'category_id' => $toys->id,'sub_name' => 'Rubik Cube', 'value' => '12249', 'status' => '1'));
+        $toys_sub=App\Model\Admin\SubCategoryModel::create(array('admin_id' => $admin1->id,'category_id' => $toys->id,'sub_name' => 'Toy train', 'value' => '995', 'status' => '1'));
         $this->command->info('Sub category inserted');
         
         App\Model\Admin\ProductModel::create(array('admin_id' => $admin1->id,'category_id' => $mobile->id, 'subcategory_id' => $subcategory_idwalton->id, 'sku' => '101','product_name' => 'primo EF3', 'brand_name' => 'Walton', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '3414', 'status' => '1'));
@@ -113,7 +122,28 @@ class AdminAppSeeder extends Seeder {
         App\Model\Admin\ProductModel::create(array('admin_id' => $admin3->id,'category_id' => $camera->id, 'subcategory_id' => $subcategory_idcamera->id, 'sku' => '3252', 'product_name' => 'Iphone 6.5', 'brand_name' => 'apphle', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '134', 'status' => '1'));
         App\Model\Admin\ProductModel::create(array('admin_id' => $admin1->id,'category_id' => $computer->id,'subcategory_id' => $subcategory_idcomputer->id, 'sku' => '1249', 'product_name' => 'Hp -smart phone 1', 'brand_name' => 'hp', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '1343', 'status' => '1'));
         App\Model\Admin\ProductModel::create(array('admin_id' => $admin1->id,'category_id' => $computer->id,'subcategory_id' => $subcategory_idcomputer->id, 'sku' => '99', 'product_name' => 'LG smart phone 7', 'brand_name' => 'lg', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '143', 'status' => '1'));
+        
+        App\Model\Admin\ProductModel::create(array('admin_id' => $admin1->id,'category_id' => $mobile->id, 'subcategory_id' => $books_sub->id, 'sku' => '101','product_name' => '3 goyenda', 'brand_name' => 'Walton', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '3414', 'status' => '1'));
+        App\Model\Admin\ProductModel::create(array('admin_id' => $admin2->id,'category_id' => $mobile->id, 'subcategory_id' => $books_sub->id,'sku' => '201','product_name' => 'himo is back', 'brand_name' => 'walton', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '3414', 'status' => '1'));
+        App\Model\Admin\ProductModel::create(array('admin_id' => $admin2->id,'category_id' => $mobile->id, 'subcategory_id' => $books_sub->id, 'sku' => '301', 'product_name' => 'science fiction', 'brand_name' => 'samsung', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '3214', 'status' => '1'));
+        App\Model\Admin\ProductModel::create(array('admin_id' => $admin2->id,'category_id' => $camera->id, 'subcategory_id' => $sports_sub->id, 'sku' => '1305', 'product_name' => 'cricket', 'brand_name' => 'samsung', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '4331', 'status' => '1'));
+        App\Model\Admin\ProductModel::create(array('admin_id' => $admin3->id,'category_id' => $camera->id, 'subcategory_id' => $toys_sub->id, 'sku' => '220', 'product_name' => 'rubic cube', 'brand_name' => 'apple', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '4143', 'status' => '1'));
+        App\Model\Admin\ProductModel::create(array('admin_id' => $admin3->id,'category_id' => $camera->id, 'subcategory_id' => $toys_sub->id, 'sku' => '3252', 'product_name' => 'doreamon', 'brand_name' => 'apphle', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '134', 'status' => '1'));
+        App\Model\Admin\ProductModel::create(array('admin_id' => $admin1->id,'category_id' => $computer->id,'subcategory_id' => $toys_sub->id, 'sku' => '1249', 'product_name' => 'Drone', 'brand_name' => 'hp', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '1343', 'status' => '1'));
+        App\Model\Admin\ProductModel::create(array('admin_id' => $admin1->id,'category_id' => $computer->id,'subcategory_id' => $toys_sub->id, 'sku' => '99', 'product_name' => 'wireless car', 'brand_name' => 'lg', 'product_quantity' => '1', 'product_description' => 'product_description', 'product_price' => '143', 'status' => '1'));
         $this->command->info('product inserted');
+        
+        
+        
+        App\Model\Admin\ProdcutImageModel::create(array('product_id' => 25, 'image_path' => 'product_images/1447759415.jpg', 'status' => '1'));
+        App\Model\Admin\ProdcutImageModel::create(array('product_id' => 26, 'image_path' => 'product_images/1447761204.png','status' => '1'));
+        App\Model\Admin\ProdcutImageModel::create(array('product_id' => 24, 'image_path' => 'product_images/1447823584.png','status' => '1'));
+        App\Model\Admin\ProdcutImageModel::create(array('product_id' => 27, 'image_path' => 'product_images/1447823584.jpg','status' => '1'));
+        App\Model\Admin\ProdcutImageModel::create(array('product_id' => 27, 'image_path' => 'product_images/1447823585.jpg',  'status' => '1'));
+        App\Model\Admin\ProdcutImageModel::create(array('product_id' => 27, 'image_path' => 'product_images/1447823585.jpg', 'status' => '1'));
+        App\Model\Admin\ProdcutImageModel::create(array('product_id' => 27, 'image_path' => 'product_images/1447823585.jpg',  'status' => '1'));
+        App\Model\Admin\ProdcutImageModel::create(array('product_id' => 27, 'image_path' => 'product_images/1447823585.jpg', 'status' => '1'));
+        $this->command->info('product image insert .......');
     }
 
 }
