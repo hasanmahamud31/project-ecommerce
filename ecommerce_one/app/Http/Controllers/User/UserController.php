@@ -9,7 +9,6 @@ use App\Model\Admin\CategoryModel;
 use App\Model\Admin\ProductModel;
 use App\Model\User\Session;
 use URL;
-use Cart;
 
 class UserController extends Controller {
 
@@ -20,14 +19,15 @@ class UserController extends Controller {
      */
     public function getUserDashboard() {
         $products = ProductModel::getProduct();
+
         $categoryAndSubcategory = CategoryModel::getCategory();
-        $cartProducts = Cart::getContent();
 
         return view('user.pages.dashboard')
                         ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                        ->with('products', $products)
-                        ->with('cartProducts', $cartProducts);
-        
+                        ->with('products', $products);
+//        return view('user.pages.product')
+//                ->with('categoryAndSubcategory', $categoryAndSubcategory)
+//                ->with('products', $products);
     }
 
     /**
@@ -37,16 +37,15 @@ class UserController extends Controller {
      */
     public function getSingleProduct($productId) {
         $product = ProductModel::getProductById($productId);
+        
         $categoryAndSubcategory = CategoryModel::getCategory();
-        $cartProducts = Cart::getContent();
-       
+
 //        return view('user.pages.dashboard')
 //                ->with('categoryAndSubcategory', $categoryAndSubcategory)
 //                ->with('products', $products);
         return view('user.pages.product')
                         ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                        ->with('products', $product)
-                        ->with('cartProducts', $cartProducts);
+                        ->with('products', $product);
     }
 
     /**
@@ -56,19 +55,17 @@ class UserController extends Controller {
      */
     public function getSubCategoryProduct($categoryId) {
         $products = ProductModel::getProductBySubCategoryId($categoryId);
+        //dd(count($products));
+        //dd($products);
         $categoryAndSubcategory = CategoryModel::getCategory();
-        $cartProducts = Cart::getContent();
-        
         if (count($products) > 0) {
             return view('user.pages.dashboard')
                             ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                            ->with('products', $products)
-                            ->with('cartProducts', $cartProducts);
+                            ->with('products', $products);
         } else {
             return view('user.pages.category_empty')
                             ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                            ->with('products', $products)
-                            ->with('cartProducts', $cartProducts);
+                            ->with('products', $products);
         }
     }
 
@@ -80,21 +77,23 @@ class UserController extends Controller {
     public function addToCart($productId) {
         $products = ProductModel::getProductById($productId);
         $categoryAndSubcategory = CategoryModel::getCategory();
-        
-        Cart::add(array(
-            'id' => $products['id'],
-            'name' => $products['product_name'],
-            'price' => $products['product_price'],
-            'quantity' => 1,
-            'attributes' => array()
-        ));
-        
-        $cartProducts = Cart::getContent();
+        //session_regenerate_id()
+      //$request = new Requests();
+        //dd(session_regenerate_id());
+         $session_array = array(
+             'payload'             => $products['id'],
+                               
+                );
+       Session::addToCart($session_array);
+       
+        session()->put('id', $products['id']);
+        session()->put('product_price', $products['product_price']);
+        session()->put('product_name', $products['product_name']);
         
         return back()
-                        ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                        ->with('products', $products)
-                        ->with('cartProducts', $cartProducts);
+                ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                ->with('products', $products);
+        
     }
 
     /**

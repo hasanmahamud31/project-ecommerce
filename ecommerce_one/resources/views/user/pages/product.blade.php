@@ -90,8 +90,6 @@
             <div class="m_bottom_15">
                 <s class="v_align_b f_size_ex_large">$152.00</s><span class="v_align_b f_size_big m_left_5 scheme_color fw_medium">TK.{{ $products['product_price'] }}</span>
             </div>
-            <form action="" method="post">
-                {{ csrf_field() }}
             <table class="description_table type_2 m_bottom_15">
                 <tr>
                     <td class="v_align_m">Size:</td>
@@ -118,14 +116,12 @@
                     </td>
                 </tr>
             </table>
-            
             <div class="d_ib_offset_0 m_bottom_20">
                 <a href="{{route('addToCart', ['id' => $products['id']])}}"><button class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large" id="add_to_cart" value="{{route('addToCart', ['id' => $products['id']])}}">Add to Cart</button></a>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Wishlist</span><i class="fa fa-heart-o f_size_big"></i></button>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Compare</span><i class="fa fa-files-o f_size_big"></i></button>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0 relative"><i class="fa fa-question-circle f_size_big"></i><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Ask a Question</span></button>
             </div>
-            </form>
             <p class="d_inline_middle">Share this:</p>
             <div class="d_inline_middle m_left_5 addthis_widget_container">
                 <!-- AddThis Button BEGIN -->
@@ -325,7 +321,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <h5 class="fw_medium m_bottom_15">Write a Review</h5>
                         <p class="f_size_medium m_bottom_15">Now please write a (short) review....(min. 100, max. 2000 characters)</p>
-                        
+                        <form>
                             <textarea class="r_corners full_width m_bottom_10 review_tarea"></textarea>
                             <p class="f_size_medium m_bottom_5">First: Rate the product. Please select a rating between 0 (poorest) and 5 stars (best).</p>
                             <div class="d_block full_width m_bottom_10">
@@ -361,7 +357,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="r_corners button_type_4 tr_all_hover mw_0 color_dark bg_light_color_2">Submit</button>
-                       
+                        </form>
                     </div>
                 </div>
             </div>
