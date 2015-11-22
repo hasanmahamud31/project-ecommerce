@@ -92,9 +92,9 @@
 
                                                 <td class="center">
                                                     <a href="{{route('edit_product',['id'=>$product->id])}}"> <button class="btn btn-edit btn-sm" data-widget='collapse' data-toggle="tooltip" title="Edit Profile"><i class="fa fa-edit"></i></button></a>
-                                                    <a href="{{route('view_product_image',['id'=>$product->id])}}"> <button class="btn btn-danger btn-sm" data-widget='view' data-toggle="tooltip" title="view image"><i class="fa fa-pencil fa-fw"></i></button></a>
-                                                    <a href="{{route('view_product_size',['id'=>$product->id])}}"> <button class="btn btn-danger btn-sm" data-widget='view_size' data-toggle="tooltip" title="view size"><i class="fa fa-server fa-fw"></i></button></a>
-                                                    <a href="{{route('view_product_color',['id'=>$product->id])}}"> <button class="btn btn-danger btn-sm" data-widget='view_color' data-toggle="tooltip" title="view color"><i class="fa fa-server fa-fw"></i></button></a>
+                                                    <a href="{{route('view_product_image',['id'=>$product->id])}}"> <button class="btn btn-danger btn-sm" data-widget='view' data-toggle="tooltip" title="view image"><i class="fa fa-camera"></i></button></a>
+                                                    <a href="{{route('view_product_size',['id'=>$product->id])}}"> <button class="btn btn-danger btn-sm" data-widget='view_size' data-toggle="tooltip" title="view size"><i class="fa fa-tag"></i></button></a>
+                                                    <a href="{{route('view_product_color',['id'=>$product->id])}}"> <button class="btn btn-danger btn-sm" data-widget='view_color' data-toggle="tooltip" title="view color"><i class="fa fa-archive"></i></button></a>
 
 
                                                     <a href="{{route('delete_product',['id'=>$product->id])}}"> <button class="btn btn-danger btn-sm" data-widget='remove' data-toggle="tooltip" title="Remove product"><i class="fa fa-times"></i></button></a>
