@@ -64,6 +64,11 @@
                     <i class="fa fa-th"></i> <span>Manage Product</span> <small class="badge pull-right bg-green">4</small>
                 </a>
             </li>
+            <li>
+                <a href="{{route('order_view')}}">
+                    <i class="fa fa-th"></i> <span>New Order</span> <small class="badge pull-right bg-green">4</small>
+                </a>
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-bar-chart-o"></i>

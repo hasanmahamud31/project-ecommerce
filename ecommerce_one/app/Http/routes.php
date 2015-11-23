@@ -133,7 +133,13 @@ Route::post('store_product_color',['as'=>'store_product_color', 'uses'=>'Product
 Route::get('add_color_form/{id}',['as'=>'add_color_form', 'uses'=>'ProductController@add_product_color']);
 Route::get('delete_color_product/{id}',['as'=>'delete_color_product', 'uses'=>'ProductController@delete_color_product']);
 
-
+//new order start from here.......................
+Route::get('order_view',['as'=>'order_view', 'uses'=>'OrderController@index']);
+Route::get('/order_status/{id}',['as'=>'order_status','uses'=>'OrderController@show'])->where(['id' => '[0-9]+']);
+Route::get('order_details/{id}',['as'=>'order_details','uses'=>'OrderController@view_order'])->where(['id' => '[0-9]+']);
+Route::post('order_update/{id}',['as'=>'update_order','uses'=>'OrderController@update'])->where(['id' => '[0-9]+']);
+Route::get('order_delete/{id}',['as'=>'delete_order','uses'=>'OrderController@destroy'])->where(['id' => '[0-9]+']);
+//new order finished from here.......................
 });
 });
 
