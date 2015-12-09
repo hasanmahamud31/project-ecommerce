@@ -19,7 +19,7 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $data = User::where('admin_access_level',99)->get();
+        $data = User::where('access_level',99)->get();
 //     dd($data);
         return view('admin.pages.user.user_manage')->with('data', $data);
     }
@@ -91,7 +91,7 @@ class UserController extends Controller {
                     'user_id'=>$user->id,
                     'email' => $data['email'],
                     'password' => bcrypt($data['password']),
-                    'admin_access_level' => '99',
+                    'access_level' => '99',
                    
         ]);
     }
@@ -114,11 +114,11 @@ class UserController extends Controller {
      */
     public function edit($id, $access_id) {
    //    dd($id,$access_level);
-        $count = User::where(['id' => $id, 'admin_access_level' => $access_id])->count();
+        $count = User::where(['id' => $id, 'access_level' => $access_id])->count();
       //  dd($count);
         if ($count == 1) {
             //get the adin I
-            $user=User::where(['id' => $id, 'admin_access_level' => $access_id])->get();
+            $user=User::where(['id' => $id, 'access_level' => $access_id])->get();
           foreach ($user as $info)
           { //dd($user_info);
             $user_id=$info->user_id; 

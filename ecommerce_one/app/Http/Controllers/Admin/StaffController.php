@@ -19,7 +19,7 @@ class StaffController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $data = User::where('admin_access_level',21)->get();
+        $data = User::where('access_level',21)->get();
 //     dd($data);
         return view('admin.pages.staff.staff_manage')->with('data', $data);
     }
@@ -94,7 +94,7 @@ class StaffController extends Controller {
                     'user_id'=>$staff->id,
                     'email' => $data['email'],
                     'password' => bcrypt($data['password']),
-                    'admin_access_level' => '21',
+                    'access_level' => '21',
                    
         ]);
     }
@@ -117,11 +117,11 @@ class StaffController extends Controller {
      */
     public function edit($id, $access_level) {
    //    dd($id,$access_level);
-        $count = User::where(['id' => $id, 'admin_access_level' => $access_level])->count();
+        $count = User::where(['id' => $id, 'access_level' => $access_level])->count();
       //  dd($count);
         if ($count == 1) {
             //get the adin I
-            $user=User::where(['id' => $id, 'admin_access_level' => $access_level])->get();
+            $user=User::where(['id' => $id, 'access_level' => $access_level])->get();
           foreach ($user as $info)
           { //dd($user_info);
             $staff_id=$info->user_id; 

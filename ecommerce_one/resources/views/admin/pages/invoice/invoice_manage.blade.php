@@ -21,8 +21,8 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Manage Order
-                        <small>advanced order</small>
+                        Order acknowledgement
+                        <small>Receive history</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="{{url('/deshboard')}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -40,7 +40,7 @@
                             <div class="box">
                                 <div class="box-header">
                                     <div class="pull-left"> 
-                                        <h3 class="box-title">Manage Order</h3>
+                                        <h3 class="box-title">Order acknowledgement</h3>
 
                                     </div>
                                 </div><!-- /.box-header -->
@@ -57,9 +57,8 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>User id</th>                                               
-                                                <th>User IP</th>                                               
-                                                <th>Shipping Address</th>
+                                                <th>Order Id</th>                                               
+                                                <th>Product Id</th>
                                                 <th>Time</th>
                                                 <th>status</th>
                                                 <th>Action</th>
@@ -67,25 +66,21 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach($data as $order)
+                                            @foreach($data as $invoice)
                                             <tr>                                                
-                                                <td>{{$order->id}}</td>                                               
-                                                <td>{{$order->user_id}}</td>
-                                                <td>{{$order->ip}}</td>
-                                                <td>{{$order->shipping_address}}</td>                                                
-                                                <td>{{$order->created_at}}</td>
+                                                <td>{{$invoice->id}}</td>                                               
+                                                <td>{{$invoice->order_id}}</td>
+                                                <td>{{$invoice->product_id}}</td>                                               
+                                                <td>{{$invoice->created_at}}</td>
                                                 <td style="text-align: center">
-
-                                                    @if($order->status=='1')
-                                                    <a href="{{route('order_status',['id'=>$order->id])}}"><small class="badge bg-green">Active</small></a>
-                                                    @else
-                                                    <a href="{{route('order_status',['id'=>$order->id])}}"><small class="badge bg-red">Inactive</small></a>
-
+                                                    @if($invoice->status=='1')
+                                                    <small class="badge bg-green">Active</small>
                                                     @endif
                                                 </td>
-
                                                 <td class="center">
-                                                    <a href="{{route('order_details',['id'=>$order->id])}}"> <button class="btn btn-edit btn-sm" data-widget='collapse' data-toggle="tooltip" title=" Orders Details"><i class="fa fa-edit"></i></button></a>
+                                                    <a href="{{route('pertial_accept_product',['id'=>$invoice->id])}}"> <button class="btn btn-edit btn-sm" data-widget='collapse' data-toggle="tooltip" title="pertial accept product"><i class="fa fa-adjust"></i></button></a>
+                                                    <a href="{{route('full_accept_product',['id'=>$invoice->id])}}"> <button class="btn btn-edit btn-sm" data-widget='collapse' data-toggle="tooltip" title="full accept product"><i class="fa fa-shopping-cart"></i></button></a>
+                                                    <a href="{{route('reject_product',['id'=>$invoice->id])}}"> <button class="btn btn-danger btn-sm" data-widget='remove' data-toggle="tooltip" title="reject product"><i class="fa fa-times"></i></button></a>
                                                 </td>
 
                                             </tr>

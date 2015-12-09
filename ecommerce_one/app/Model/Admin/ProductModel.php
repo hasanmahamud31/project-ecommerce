@@ -20,7 +20,7 @@ class ProductModel extends Model
      * 
      * @var type array
      */
-    protected $fillable = ['admin_id','sku', 'category_id', 'subcategory_id', 'product_name', 'brand_name', 'product_quantity', 'product_description', 'product_price', 'status'];
+    protected $fillable = ['admin_id','access_level','sku', 'category_id', 'subcategory_id', 'product_name', 'brand_name', 'product_quantity', 'product_description', 'product_price', 'status'];
     
     /**
      * send all the product in the data

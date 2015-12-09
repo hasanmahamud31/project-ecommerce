@@ -19,7 +19,7 @@ class ResellerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $data = User::where('admin_access_level',13)->get();
+        $data = User::where('access_level',13)->get();
 //     dd($data);
         return view('admin.pages.reseller.reseller_manage')->with('data', $data);
     }
@@ -94,7 +94,7 @@ class ResellerController extends Controller {
                     'user_id'=>$reseller->id,
                     'email' => $data['email'],
                     'password' => bcrypt($data['password']),
-                    'admin_access_level' => '13',
+                    'access_level' => '13',
                    
         ]);
     }
@@ -117,11 +117,11 @@ class ResellerController extends Controller {
      */
     public function edit($id, $access_id) {
    //    dd($id,$access_level);
-        $count = User::where(['id' => $id, 'admin_access_level' => $access_id])->count();
+        $count = User::where(['id' => $id, 'access_level' => $access_id])->count();
       //  dd($count);
         if ($count == 1) {
             //get the adin I
-            $user=User::where(['id' => $id, 'admin_access_level' => $access_id])->get();
+            $user=User::where(['id' => $id, 'access_level' => $access_id])->get();
           foreach ($user as $info)
           { //dd($user_info);
             $reseller_id=$info->user_id; 

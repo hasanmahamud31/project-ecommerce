@@ -13,7 +13,7 @@ class CreateProductColorModelsTable extends Migration
     {
         Schema::create('product_color', function (Blueprint $table) {
           $table->increments('id');
-            $table->string('product_id',7);
+            $table->integer('product_id');
             $table->string('color_name',20);
             $table->tinyInteger('status');
             $table->timestamps();

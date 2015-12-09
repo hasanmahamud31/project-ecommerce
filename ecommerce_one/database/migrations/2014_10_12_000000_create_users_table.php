@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration {
             $table->integer('user_id');
             $table->string('email', 120)->unique();
             $table->string('password', 120);            
-            $table->string('admin_access_level', 120);
+            $table->integer('access_level');
             $table->tinyInteger('status', $autoIncrement = FALSE, $unsigned = true)->default(1);
             $table->rememberToken();
             $table->timestamps();

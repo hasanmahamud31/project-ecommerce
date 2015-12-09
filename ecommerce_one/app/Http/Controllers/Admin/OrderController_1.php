@@ -9,9 +9,10 @@ use App\Model\Admin\OrderModel;
 use App\Model\Admin\OrderedProductModel;
 use App\Model\Admin\UserModel;
 use App\Model\Admin\CommentsModel;
-use App\Model\Admin\InvoiceModel;
 use App\User;
-use DB,PDF,App,Auth;
+use DB;
+use PDF;
+use App;
 
 class OrderController extends Controller {
 
@@ -19,19 +20,8 @@ class OrderController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $user = Auth::user();
-        $access_level = $user->access_level;
-        $id = $user->id;
-        if ($access_level == 11 || $access_level == 12) {
-            $data = OrderModel::where('delation_status', 0)->get();
+        $data = OrderModel::where('delation_status', 0)->get();
 //     dd($data);
-        } elseif ($access_level == 13) {
-            $data = OrderModel::where('delation_status', 0)->where('access_level', $access_level)->where('user_id', $id)->get();
-//     dd($data);  
-        } elseif ($access_level == 21) {
-            $data = OrderModel::where('delation_status', 0)->where('access_level', $access_level)->get();
-//     dd($data);
-        }
         return view('admin.pages.new_order.order_manage')->with('data', $data);
     }
 
@@ -52,45 +42,25 @@ class OrderController extends Controller {
     /**
      * product active inactive status....... 
      */
-    public function show_product(Request $request) {
-        $input = $request->all();
-        //   DB::transaction(function ($input)use ($input) {
-        $id = $input['id'];
-        $comment = $input['comment'];
+    public function show_product($id) {
         $datam = OrderedProductModel::where('id', $id)->get();
         $order_id = $datam->first()['order_id'];
-        $data = OrderedProductModel::where('order_id', $order_id)->where('del', 0)->where('invoice_status', 0)->get();
+        $data = OrderedProductModel::where('order_id', $order_id)->where('del', 0)->get();
         if (count($data) > 1) {
-            OrderedProductModel::where('id', $id)->update(['del' => 1, 'comment' => $comment]);
+            OrderedProductModel::where('id', $id)->update(['del' => 1]);
             return back()->with('message', 'status change successfully.....');
         } else {
-            OrderedProductModel::where('id', $id)->update(['del' => 1, 'comment' => $comment]);
-            OrderModel::where('id', $order_id)->update(['delation_status' => 1]);
+            OrderedProductModel::where('id', $id)->update(['del' => 1]);
+            OrderModel::where('id', $order_id)->update(['status' => 0]);
             return redirect()->route('order_view')->with('message', 'order deleted');
         }
-        // });
     }
 
     /**
-     * Submit invoice......
+     * Show the form for editing the specified resource.
      */
-    public function submit_invoice($id) {
-        DB::transaction(function ($id)use ($id) {
-            $user_info = Auth::user();
-            $admin_id = $user_info->id;
-            $data = OrderedProductModel::where('order_id', $id)->where('del', 0)->where('invoice_status', 0)->get();
-            foreach ($data as $d) {
-
-                OrderedProductModel::where('id', $d->id)->update(['del' => 1, 'invoice_status' => 1, 'comment' => 'successfull', 'order_receiver_id' => $admin_id]);
-                OrderModel::where('id', $d->order_id)->update(['delation_status' => 1]);
-                InvoiceModel::create([
-                    'order_id' => $id,
-                    'product_id' => $d->id,
-                    'access_level' => $user_info->access_level,
-                ]);
-            }
-        });
-        return redirect()->route('order_view');
+    public function edit($id) {
+        //
     }
 
     public function view_order($id) {
@@ -141,20 +111,19 @@ class OrderController extends Controller {
                 ->with('data_order', $data_order)
                 ->with('data_user', $data_user)
                 ->render();
-        return PDF::loadHTML($html)->setPaper('a4')->setOrientation('landscape')->setWarnings(false)->stream('download.pdf');
+      return   PDF::loadHTML($html)->setPaper('a4')->setOrientation('landscape')->setWarnings(false)->stream('download.pdf');
     }
 
     /**
      * product quantity update.......
      */
     public function update(Request $request) {
+
         $input = $request->all();
-        DB::transaction(function ($input)use ($input) {
-            $id = $input['id'];
-            $quantity = $input['quantity'];
-            $data = OrderedProductModel::findOrfail($id);
-            $data->update(['quantity' => $quantity]);
-        });
+        $id = $input['id'];
+        $quantity = $input['quantity'];
+        $data = OrderedProductModel::findOrfail($id);
+        $data->update(['quantity' => $quantity]);
         return back();
     }
 
@@ -162,10 +131,8 @@ class OrderController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy($id) {
-        DB::transaction(function ($id)use ($id) {
-            $data = OrderModel::findOrfail($id);
-            $data->update(['delation_status' => 1]);
-        });
+        $data = OrderModel::findOrfail($id);
+        $data->update(['delation_status' => 1]);
         return redirect()->route('order_view')->with('message', 'Order delete successfully.....');
     }
 

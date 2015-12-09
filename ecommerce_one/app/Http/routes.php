@@ -22,7 +22,7 @@ Route::get('/product/{productId}/cart', ['as'=>'addToCart', 'uses'=>'User\UserCo
  * 
 */
 Route::get('/admin','Auth\AuthController@getLogin');
-Route::get('auth/login','Auth\AuthController@getLogin');
+//Route::get('auth/login','Auth\AuthController@getLogin');
 Route::post('/admin', 'Auth\AuthController@postLogin');
 
 Route::get('/home', function () {
@@ -38,11 +38,13 @@ Route::get('/dashboard', function () {
     if (Auth::guest()) {
         return Redirect::to('/admin');
     } else {
+        
         return view('admin.pages.home');
     }
 });
 
 Route::group(['middleware' => 'auth'],function(){
+    
 // folder of a controller ...........
 Route::group(['namespace'=>'Admin'],  function (){
     
@@ -106,7 +108,7 @@ Route::get('subcategory_delete/{id}',['as'=>'delete_subcategory','uses'=>'SubCat
 
 //product route start from here.......................
 Route::get('product_view',['as'=>'product_view', 'uses'=>'ProductController@index']);
-Route::get('ajax_search_subcategory/{id}',['as'=>'ajax_search_subcategory', 'uses'=>'ProductController@ajax_search_subcategory']);
+Route::get('ajax_search_subcategory',['as'=>'ajax_search_subcategory', 'uses'=>'ProductController@ajax_search_subcategory']);
 Route::get('add_product_form',['as'=>'add_product_form', 'uses'=>'ProductController@create']);
 Route::post('store_Product',['as'=>'store_product', 'uses'=>'ProductController@store']);
 Route::get('/product_status/{id}',['as'=>'product_status','uses'=>'ProductController@show'])->where(['id' => '[0-9]+']);
@@ -136,9 +138,33 @@ Route::get('delete_color_product/{id}',['as'=>'delete_color_product', 'uses'=>'P
 //new order start from here.......................
 Route::get('order_view',['as'=>'order_view', 'uses'=>'OrderController@index']);
 Route::get('/order_status/{id}',['as'=>'order_status','uses'=>'OrderController@show'])->where(['id' => '[0-9]+']);
+Route::post('/order_status_product',['as'=>'order_status_product','uses'=>'OrderController@show_product']);
 Route::get('order_details/{id}',['as'=>'order_details','uses'=>'OrderController@view_order'])->where(['id' => '[0-9]+']);
+Route::get('order_details_pdf/{id}',['as'=>'order_details_pdf','uses'=>'OrderController@view_order_pdf'])->where(['id' => '[0-9]+']);
 Route::post('order_update/{id}',['as'=>'update_order','uses'=>'OrderController@update'])->where(['id' => '[0-9]+']);
+Route::post('update_product_quantity',['as'=>'update_product_quantity','uses'=>'OrderController@update']);
+Route::get('submit_invoice/{id}',['as'=>'submit_invoice', 'uses'=>'OrderController@submit_invoice']);
 Route::get('order_delete/{id}',['as'=>'delete_order','uses'=>'OrderController@destroy'])->where(['id' => '[0-9]+']);
+//new order finished from here.......................
+
+
+//new order start from here.......................
+Route::get('invoice_view',['as'=>'invoice_view', 'uses'=>'InvoiceController@index']);
+Route::get('pertial_accept_product/{id}',['as'=>'pertial_accept_product', 'uses'=>'InvoiceController@pertial_accept_product']);
+Route::post('store_ack_history',['as'=>'store_ack_history', 'uses'=>'InvoiceController@store_ack_history']);
+Route::get('full_accept_product/{id}',['as'=>'full_accept_product', 'uses'=>'InvoiceController@full_accept_product']);
+Route::get('reject_product/{id}',['as'=>'reject_product', 'uses'=>'InvoiceController@reject_product']);
+//new order finished from here.......................
+
+//new order start from here.......................
+Route::get('profile',['as'=>'profile', 'uses'=>'UserProfile@index']);
+Route::get('change_password/{id}',['as'=>'change_password', 'uses'=>'UserProfile@change_password']);
+Route::post('update_password',['as'=>'update_password', 'uses'=>'UserProfile@update_password']);
+Route::get('edit_profile/{id}',['as'=>'edit_profile', 'uses'=>'UserProfile@edit_profile']);
+Route::post('update_profile',['as'=>'update_profile', 'uses'=>'UserProfile@update_profile']);
+Route::get('change_image/{id}',['as'=>'change_image', 'uses'=>'UserProfile@change_image']);
+Route::post('update_image',['as'=>'update_image', 'uses'=>'UserProfile@update_image']);
+//Route::get('reject_product/{id}',['as'=>'reject_product', 'uses'=>'InvoiceController@reject_product']);
 //new order finished from here.......................
 });
 });

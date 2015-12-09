@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+    <?php
+    $access_level = Auth::user()->admin_access_level;
+    ?>
+
     <!--     head section start -->
 
     @include('admin.includes.head')
@@ -14,9 +18,8 @@
         <div class="wrapper row-offcanvas row-offcanvas-left">
 
             <!--             Left side column. contains the logo and side bar -->
-
             @include('admin.includes.left_menu')
-
+           
             <!--            main content start -->
 
             @yield('content')
