@@ -8,7 +8,7 @@
                 <div class="f_left half_column">
                     <div class="relative d_inline_b m_bottom_10 qv_preview">
                         <span class="hot_stripe"><img src="{{URL::to('front_end_resource/images/sale_product.png')}}" alt=""></span>
-                        <img src="{{URL::to('front_end_resource/images/quick_view_img_1.jpg')}}" class="tr_all_hover" alt="">
+                        <img height="360" width="360" src="{{ URL::to($product->productImage->first()['image_path']) }}" class="tr_all_hover" alt="">
                     </div>
                     <!--carousel-->
                     <div class="relative qv_carousel_wrap m_bottom_20">
@@ -16,12 +16,14 @@
                             <i class="fa fa-angle-left "></i>
                         </button>
                         <ul class="qv_carousel d_inline_middle">
-                            <li data-src="{{URL::to('front_end_resource/images/quick_view_img_1.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_4.jpg')}}" alt=""></li>
-                            <li data-src="{{URL::to('front_end_resource/images/quick_view_img_2.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_5.jpg')}}" alt=""></li>
+                            @foreach($product->productImage as $product_image)
+                            <li data-src="{{URL::to($product_image['image_path'])}}"><img src="{{URL::to($product_image['image_path'])}}" alt=""></li>
+<!--                            <li data-src="{{URL::to('front_end_resource/images/quick_view_img_2.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_5.jpg')}}" alt=""></li>
                             <li data-src="{{URL::to('front_end_resource/images/quick_view_img_3.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_6.jpg')}}" alt=""></li>
                             <li data-src="{{URL::to('front_end_resource/images/quick_view_img_1.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_4.jpg')}}" alt=""></li>
                             <li data-src="{{URL::to('front_end_resource/images/quick_view_img_2.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_5.jpg')}}" alt=""></li>
-                            <li data-src="{{URL::to('front_end_resource/images/quick_view_img_3.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_6.jpg')}}" alt=""></li>
+                            <li data-src="{{URL::to('front_end_resource/images/quick_view_img_3.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_6.jpg')}}" alt=""></li>-->
+                            @endforeach
                         </ul>
                         <button class="button_type_11 t_align_c f_size_ex_large bg_cs_hover r_corners d_inline_middle bg_tr tr_all_hover qv_btn_next">
                             <i class="fa fa-angle-right "></i>
@@ -83,7 +85,7 @@
                         </tr>
                         <tr>
                             <td>Product Code:</td>
-                            <td>PS06</td>
+                            <td>{{ $product['sku'] }}</td>
                         </tr>
                     </table>
                     <h5 class="fw_medium m_bottom_10">Product Dimensions and Weight</h5>

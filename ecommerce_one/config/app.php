@@ -144,7 +144,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
+        /**
+         * Cart Service Provider
+         */
+        Darryldecode\Cart\CartServiceProvider::class
     ],
 
     /*
@@ -193,7 +196,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'PDF'       => Barryvdh\DomPDF\Facade::class,
+        'Cart'      => Darryldecode\Cart\Facades\CartFacade::class,
     ],
 
 ];

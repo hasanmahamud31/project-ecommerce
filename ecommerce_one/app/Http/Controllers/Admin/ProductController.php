@@ -25,31 +25,12 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $user=Auth::user();
-        $access_level=$user->access_level;
-        $id=$user->id;
-       if($access_level==11 || $access_level==12){
-            $data = DB::table('product')
+        $data = DB::table('product')
                 ->join('category', 'category.id', '=', 'product.category_id')
                 ->join('subcategory', 'subcategory.id', '=', 'product.subcategory_id')
                 ->select('product.*', 'category.name', 'subcategory.sub_name')
                 ->get();
-//     dd($data);      
-       }elseif ($access_level==13) {
-            $data = DB::table('product')->where('access_level',$access_level)->where('product.admin_id',$id)
-                ->join('category', 'category.id', '=', 'product.category_id')
-                ->join('subcategory', 'subcategory.id', '=', 'product.subcategory_id')
-                ->select('product.*', 'category.name', 'subcategory.sub_name')
-                ->get();
-//     dd($data);           
-        }elseif ($access_level==21) {
-             $data = DB::table('product')->where('access_level',$access_level)
-                ->join('category', 'category.id', '=', 'product.category_id')
-                ->join('subcategory', 'subcategory.id', '=', 'product.subcategory_id')
-                ->select('product.*', 'category.name', 'subcategory.sub_name')
-                ->get();
-//     dd($data);            
-        }
+//     dd($data);
         return view('admin.pages.product.product_manage')->with('data', $data);
     }
 
@@ -83,10 +64,6 @@ class ProductController extends Controller {
      */
     public function store(Request $request) {
         $admin = Auth::User();
-        $id=$admin->id;
-        $access_level=$admin->access_level;
-       // dd($access_level);
-        
         $data = $request->all();
         $validator = Validator::make($data, [
                     'sku' => 'required|unique:product,sku',
@@ -104,8 +81,7 @@ class ProductController extends Controller {
                             ->withErrors($validator);
         } else {
             $pro_id = ProductModel::create([
-                        'admin_id' => $id,
-                        'access_level' =>$access_level,
+                        'admin_id' => $admin->id,
                         'category_id' => $data['category_id'],
                         'subcategory_id' => $data['subcategory_id'],
                         'sku' => $data['sku'],
@@ -360,7 +336,7 @@ class ProductController extends Controller {
     public function delete_size_product($id) {
         $data = ProductSizeModel::findOrfail($id);
         $data->delete($id);
-        return back()->with('message','Product Image size successfully deleted..');
+        return back()->with('message', 'Product Image size successfully deleted..');
     }
     
     

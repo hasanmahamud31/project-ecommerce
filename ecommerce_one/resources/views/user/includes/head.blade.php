@@ -6,6 +6,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/ico" href="{{URL::to('front_end_resource/images/fav.ico')}}">
     <!--stylesheet include-->
     <link rel="stylesheet" type="text/css" media="all" href="{{URL::to('front_end_resource/css/jquery.fancybox-1.3.4.css')}}">

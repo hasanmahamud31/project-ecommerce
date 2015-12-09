@@ -23,6 +23,15 @@
         <input type="password" name="password_confirmation">
     </div>
     <div>
+        Admin Priority
+        <input type="password" name="password_confirmation">
+    </div>
+    <div>
+        Admin status
+        <input type="password" name="password_confirmation">
+    </div>
+
+    <div>
         <button type="submit">Register</button>
     </div>
 </form>

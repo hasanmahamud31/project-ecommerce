@@ -86,6 +86,8 @@
 
                                                 <td class="center">
                                                     <a href="{{route('order_details',['id'=>$order->id])}}"> <button class="btn btn-edit btn-sm" data-widget='collapse' data-toggle="tooltip" title=" Orders Details"><i class="fa fa-edit"></i></button></a>
+                                                    <a href="{{route('delete_order',['id'=>$order->id])}}"> <button class="btn btn-danger btn-sm" data-widget='remove' data-toggle="tooltip" title="Remove order"><i class="fa fa-times"></i></button></a>
+
                                                 </td>
 
                                             </tr>

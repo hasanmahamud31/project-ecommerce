@@ -6,7 +6,7 @@
         <div class="photoframe type_2 shadow r_corners f_left f_sm_none d_xs_inline_b product_single_preview relative m_right_30 m_bottom_5 m_sm_bottom_20 m_xs_right_0 w_mxs_full">
             <span class="hot_stripe"><img src="{{URL::to('front_end_resource/images/sale_product.png')}}" alt=""></span>
             <div class="relative d_inline_b m_bottom_10 qv_preview d_xs_block">
-                <img id="zoom_image" src="{{URL::to('front_end_resource/images/quick_view_img_7.jpg')}}" data-zoom-image="{{URL::to('front_end_resource/images/preview_zoom_1.jpg')}}" class="tr_all_hover" alt="">
+                <img id="zoom_image"  height="438px" width="438" src="{{ URL::to($products->first()->productImage->first()['image_path']) }}" data-zoom-image="{{ URL::to($products->first()->productImage->first()['image_path']) }}" class="tr_all_hover" alt="">
                 <a href="{{URL::to('front_end_resource/images/preview_zoom_1.jpg')}}" class="d_block button_type_5 r_corners tr_all_hover box_s_none color_light p_hr_0">
                     <i class="fa fa-expand"></i>
                 </a>
@@ -17,12 +17,10 @@
                     <i class="fa fa-angle-left "></i>
                 </button>
                 <ul class="qv_carousel_single d_inline_middle">
-                    <a href="#" data-image="{{URL::to('front_end_resource/images/quick_view_img_7.jpg')}}" data-zoom-image="{{URL::to('front_end_resource/images/preview_zoom_1.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_10.jpg')}}" alt=""></a>
-                    <a href="#" data-image="{{URL::to('front_end_resource/images/quick_view_img_8.jpg')}}" data-zoom-image="{{URL::to('front_end_resource/images/preview_zoom_2.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_11.jpg')}}" alt=""></a>
-                    <a href="#" data-image="{{URL::to('front_end_resource/images/quick_view_img_9.jpg')}}" data-zoom-image="{{URL::to('front_end_resource/images/preview_zoom_3.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_12.jpg')}}" alt=""></a>
-                    <a href="#" data-image="{{URL::to('front_end_resource/images/quick_view_img_16.jpg')}}" data-zoom-image="{{URL::to('front_end_resource/images/preview_zoom_4.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_13.jpg')}}" alt=""></a>
-                    <a href="#" data-image="{{URL::to('front_end_resource/images/quick_view_img_17.jpg')}}" data-zoom-image="{{URL::to('front_end_resource/images/preview_zoom_5.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_14.jpg')}}" alt=""></a>
-                    <a href="#" data-image="{{URL::to('front_end_resource/images/quick_view_img_18.jpg')}}" data-zoom-image="{{URL::to('front_end_resource/images/preview_zoom_6.jpg')}}"><img src="{{URL::to('front_end_resource/images/quick_view_img_15.jpg')}}" alt=""></a>
+                    @foreach($products->first()->productImage as $productImage)
+                    <a href="#" data-image="{{ URL::to($productImage['image_path']) }}" data-zoom-image="{{URL::to($productImage['image_path'])}}"><img src="{{URL::to($productImage['image_path'])}}" alt=""></a>
+                  
+                    @endforeach
                 </ul>
                 <button class="button_type_11 bg_light_color_1 t_align_c f_size_ex_large bg_cs_hover r_corners d_inline_middle bg_tr tr_all_hover qv_btn_single_next">
                     <i class="fa fa-angle-right "></i>
@@ -31,7 +29,7 @@
         </div>
         <div class="p_top_10 t_xs_align_l">
             <!--description-->
-            <h2 class="color_dark fw_medium m_bottom_10">{{ $products['product_name'] }}</h2>
+            <h2 class="color_dark fw_medium m_bottom_10">{{ $products->first()['product_name'] }}</h2>
             <div class="m_bottom_10">
                 <!--rating-->
                 <ul class="horizontal_list d_inline_middle type_2 clearfix rating_list tr_all_hover">
@@ -62,7 +60,7 @@
             <table class="description_table m_bottom_10">
                 <tr>
                     <td>Manufacturer:</td>
-                    <td><a href="#" class="color_dark">Chanel</a></td>
+                    <td><a href="#" class="color_dark">{{ $products->first()['brand_name']}}</a></td>
                 </tr>
                 <tr>
                     <td>Availability:</td>
@@ -85,43 +83,72 @@
                 </tr>
             </table>
             <hr class="divider_type_3 m_bottom_10">
-            <p class="m_bottom_10">Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem ipsum dolor sit amet, consecvtetuer adipiscing. </p>
+            <p class="m_bottom_10">{{ $products->first()['product_description'] }}</p>
             <hr class="divider_type_3 m_bottom_15">
             <div class="m_bottom_15">
-                <s class="v_align_b f_size_ex_large">$152.00</s><span class="v_align_b f_size_big m_left_5 scheme_color fw_medium">TK.{{ $products['product_price'] }}</span>
+                <s class="v_align_b f_size_ex_large">TK. 152</s><span class="v_align_b f_size_big m_left_5 scheme_color fw_medium">TK.{{ $products->first()['product_price'] }}</span>
             </div>
+            <form method="post" action="{{route('addToCart')}}">
+                {{ csrf_field() }}
+                <input name="product_id" type="hidden" value="{{ $products->first()['id'] }}"
+                
             <table class="description_table type_2 m_bottom_15">
+                @if($products->first()->productSize->first()['size_name'] != -1)
                 <tr>
-                    <td class="v_align_m">Size:</td>
+                    <td class="v_align_m"><br>Size:</td>
                     <td class="v_align_m">
                         <div class="custom_select f_size_medium relative d_inline_middle">
-                            <div class="select_title r_corners relative color_dark">s</div>
+<!--                            <div class="select_title r_corners relative color_dark">Select Size</div>-->
                             <ul class="select_list d_none"></ul>
-                            <select name="product_name">
-                                <option value="s">s</option>
-                                <option value="m">m</option>
-                                <option value="l">l</option>
+                            <select name="product_size" id="pd_size">
+                                @foreach($products->first()->productSize as $productSize)
+                                <option value="{{ $productSize['size_name'] }}">{{ $productSize['size_name'] }}</option>
+<!--                            <option value="m">m</option>
+                                <option value="l">l</option>-->
+                                @endforeach
                             </select>
                         </div>
                     </td>
                 </tr>
+                @endif
+                @if($products->first()->productColor->first()['color_name'] != -1)
                 <tr>
-                    <td class="v_align_m">Quantity:</td>
+                    <td class="v_align_m">Color:</td>
+                    <td class="v_align_m">
+                        <div class="custom_select f_size_medium relative d_inline_middle">
+                            <div class="select_title r_corners relative color_dark">Select Color</div>
+                            <ul class="select_list d_none"></ul>
+                            <select name="product_color" id="pd_color">
+                                
+                                @foreach($products->first()->productColor as $productColor)
+                                <option value="{{ $productColor['color_name'] }}">{{ $productColor['color_name'] }}</option>
+<!--                            <option value="m">m</option>
+                                <option value="l">l</option>-->
+                                @endforeach
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                @endif
+                <tr>
+                    <td class="v_align_m"><br><br>Quantity:</td>
                     <td class="v_align_m">
                         <div class="clearfix quantity r_corners d_inline_middle f_size_medium color_dark">
                             <button class="bg_tr d_block f_left" data-direction="down">-</button>
-                            <input type="text" name="" readonly value="1" class="f_left">
+                            <input type="text" name="quantity" id="pd_quantity" readonly value="1" class="f_left">
                             <button class="bg_tr d_block f_left" data-direction="up">+</button>
                         </div>
                     </td>
                 </tr>
+                
             </table>
             <div class="d_ib_offset_0 m_bottom_20">
-                <a href="{{route('addToCart', ['id' => $products['id']])}}"><button class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large" id="add_to_cart" value="{{route('addToCart', ['id' => $products['id']])}}">Add to Cart</button></a>
+                <button class="button_type_12 r_corners bg_scheme_color color_light tr_delay_hover d_inline_b f_size_large" id="add_to_cart" value="">Add to Cart</button>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Wishlist</span><i class="fa fa-heart-o f_size_big"></i></button>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0"><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Compare</span><i class="fa fa-files-o f_size_big"></i></button>
                 <button class="button_type_12 bg_light_color_2 tr_delay_hover d_inline_b r_corners color_dark m_left_5 p_hr_0 relative"><i class="fa fa-question-circle f_size_big"></i><span class="tooltip tr_all_hover r_corners color_dark f_size_small">Ask a Question</span></button>
             </div>
+        </form>
             <p class="d_inline_middle">Share this:</p>
             <div class="d_inline_middle m_left_5 addthis_widget_container">
                 <!-- AddThis Button BEGIN -->
@@ -321,7 +348,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <h5 class="fw_medium m_bottom_15">Write a Review</h5>
                         <p class="f_size_medium m_bottom_15">Now please write a (short) review....(min. 100, max. 2000 characters)</p>
-                        <form>
+                        
                             <textarea class="r_corners full_width m_bottom_10 review_tarea"></textarea>
                             <p class="f_size_medium m_bottom_5">First: Rate the product. Please select a rating between 0 (poorest) and 5 stars (best).</p>
                             <div class="d_block full_width m_bottom_10">
@@ -357,7 +384,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="r_corners button_type_4 tr_all_hover mw_0 color_dark bg_light_color_2">Submit</button>
-                        </form>
+                       
                     </div>
                 </div>
             </div>
@@ -615,5 +642,5 @@
     </div>
     <hr class="divider_type_3 m_bottom_15">
     <a href="category_grid.html" role="button" class="d_inline_b bg_light_color_2 color_dark tr_all_hover button_type_4 r_corners"><i class="fa fa-reply m_left_5 m_right_10 f_size_large"></i>Back to: Woman</a>
-</section
+</section>
 @stop

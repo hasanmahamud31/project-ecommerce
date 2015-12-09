@@ -8,7 +8,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{URL::to('/deshboard')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Edit Product</li>
+            <li class="active">Registration</li>
         </ol>
     </section>
 
@@ -36,8 +36,7 @@
             <form method="POST" name="edit" role="form" action="{{route('update_product',['id'=>$datam->id])}}" enctype="multipart/form-data">
                 {!! csrf_field() !!}
                 <div class="box-body">
-                      <!-- select -->
-                    <div class="form-group">
+                     <div class="form-group">
                         <label>Select Category</label>
                         <select class="form-control" name="category_id" id="category_id" required>
                             <?php foreach ($cat as $data) { ?>
@@ -48,7 +47,7 @@
                     <!-- select -->
                     <div class="form-group">
                         <label>Select Sub Category</label>
-                        <select class="form-control" name="subcategory_id" id="subcategory_id" required>
+                        <select class="form-control" id="subcategory_id" name="subcategory_id" required>
                             <?php foreach ($subcat as $data) { ?>
                                 <option value="<?php echo $data['id'] ?>"><?php echo $data['sub_name'] ?></option>
                             <?php } ?>

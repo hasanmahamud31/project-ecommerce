@@ -7,8 +7,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\CategoryModel;
 use App\Model\Admin\ProductModel;
+use App\Model\Admin\ProdcutImageModel;
+use App\Model\Admin\ProductSizeModel;
+use App\Model\Admin\ProductColorModel;
 use App\Model\User\Session;
 use URL;
+use Cart;
+use Input;
+use Auth;
 
 class UserController extends Controller {
 
@@ -19,15 +25,14 @@ class UserController extends Controller {
      */
     public function getUserDashboard() {
         $products = ProductModel::getProduct();
-
         $categoryAndSubcategory = CategoryModel::getCategory();
+
+        $cartProducts = Cart::getContent();
 
         return view('user.pages.dashboard')
                         ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                        ->with('products', $products);
-//        return view('user.pages.product')
-//                ->with('categoryAndSubcategory', $categoryAndSubcategory)
-//                ->with('products', $products);
+                        ->with('products', $products)
+                        ->with('cartProducts', $cartProducts);
     }
 
     /**
@@ -37,15 +42,17 @@ class UserController extends Controller {
      */
     public function getSingleProduct($productId) {
         $product = ProductModel::getProductById($productId);
-        
+        //dd($product->first()->productSize->first());
         $categoryAndSubcategory = CategoryModel::getCategory();
-
+        $cartProducts = Cart::getContent();
+        //dd($cartProducts);
 //        return view('user.pages.dashboard')
 //                ->with('categoryAndSubcategory', $categoryAndSubcategory)
 //                ->with('products', $products);
         return view('user.pages.product')
                         ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                        ->with('products', $product);
+                        ->with('products', $product)
+                        ->with('cartProducts', $cartProducts);
     }
 
     /**
@@ -55,17 +62,19 @@ class UserController extends Controller {
      */
     public function getSubCategoryProduct($categoryId) {
         $products = ProductModel::getProductBySubCategoryId($categoryId);
-        //dd(count($products));
-        //dd($products);
         $categoryAndSubcategory = CategoryModel::getCategory();
+        $cartProducts = Cart::getContent();
+
         if (count($products) > 0) {
             return view('user.pages.dashboard')
                             ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                            ->with('products', $products);
+                            ->with('products', $products)
+                            ->with('cartProducts', $cartProducts);
         } else {
             return view('user.pages.category_empty')
                             ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                            ->with('products', $products);
+                            ->with('products', $products)
+                            ->with('cartProducts', $cartProducts);
         }
     }
 
@@ -74,28 +83,98 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function addToCart($productId) {
+    public function addToCart() {
+        $cartData = Input::all();
+        //dd(array_key_exists('product_color', $cartData));
+        $color      = array_key_exists('product_color', $cartData)? $cartData['product_color'] : NULL;
+        $size       = array_key_exists('product_size', $cartData) ? $cartData['product_size'] : NULL;
+        $quantity   = $cartData['quantity'];
+        $productId  = $cartData['product_id'];
+        
+        //echo " size :  " . $size . " color : " . $color . " quantity : " . $quantity . " product id : " . $productId;        exit();
+        
         $products = ProductModel::getProductById($productId);
+        //dd($products);
         $categoryAndSubcategory = CategoryModel::getCategory();
-        //session_regenerate_id()
-      //$request = new Requests();
-        //dd(session_regenerate_id());
-         $session_array = array(
-             'payload'             => $products['id'],
-                               
-                );
-       Session::addToCart($session_array);
-       
-        session()->put('id', $products['id']);
-        session()->put('product_price', $products['product_price']);
-        session()->put('product_name', $products['product_name']);
+        //dd($categoryAndSubcategory);
+        //dd($products);
         
-        return back()
-                ->with('categoryAndSubcategory', $categoryAndSubcategory)
-                ->with('products', $products);
-        
+        foreach ($products as $product) {
+            Cart::add(array(
+                'id'            => $product['id'],
+                'name'          => $product['product_name'],
+                'price'         => $product['product_price'],
+                'quantity'      => $quantity,
+                'attributes'    => array(
+                                'size' =>  $size,
+                                'color' => $color
+                )
+            ));
+        }
+        $cartProducts = Cart::getContent();
+        //dd($cartProducts);
+//        return back()
+//                    ->with('categoryAndSubcategory', $categoryAndSubcategory)
+//                    ->with('products', $products)
+//                    ->with('cartProducts', $cartProducts);
+
+        return view('user.pages.product_cart')
+                        ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                        ->with('products', $products)
+                        ->with('cartProducts', $cartProducts);
+                        
     }
 
+    public function showCart() {
+        $products = ProductModel::getProductById($productId);
+        //dd($products);
+        $categoryAndSubcategory = CategoryModel::getCategory();
+        //dd($categoryAndSubcategory);
+        //dd($products);
+        $cartProducts = Cart::getContent();
+        return view('user.pages.product_cart')
+                        ->with('categoryAndSubcategory', $categoryAndSubcategory)
+                        ->with('products', $products)
+                        ->with('cartProducts', $cartProducts);
+    }
+
+    /**
+     * delete cart product by id
+     * 
+     * @param product $id
+     */
+    public function deleteCart() {
+        if (Request::ajax()) {
+            //return "ajax";
+            $product_id = Input::get('id');
+            Cart::remove($product_id);
+            return true;
+        } else {
+            
+        }
+    }
+    
+    public function postUserLogin() {
+        $data = Input::all();
+        
+        if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+            // Authentication passed...
+            //return redirect()->intended('/');
+            return back();
+        } else {
+            return back();
+        } 
+        
+        
+    }
+    public function getUserLogout() {
+        if(Auth::check()) {
+            Auth::logout();
+            return back();
+        } else {
+            return redirect()->intended('/');
+        }
+    }
     /**
      * Display a listing of the resource.
      *

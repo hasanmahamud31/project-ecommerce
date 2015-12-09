@@ -38,7 +38,6 @@ $("#category_id").change(function () {
             success: function (response)
             {
                 $('#subcategory_id').html(response);
-               
             }
         });
 });

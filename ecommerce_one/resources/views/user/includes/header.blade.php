@@ -4,7 +4,11 @@
         <div class="container">
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-4 col-sm-3 t_xs_align_c">
-                    <p class="f_size_small">Welcome visitor can you	<a href="#" data-popup="#login_popup">Log In</a> or <a href="#">Create an Account</a> </p>
+                    @if (Auth::check())
+                    <p class="f_size_small">Welcome  {{ Auth::user()->email}} </p>
+                    @else
+                    <p class="f_size_small">Welcome visitor can you <a href="#" data-popup="#login_popup">Log In</a> or <a href="#">Create an Account</a> </p> 
+                    @endif
                 </div>
                 <nav class="col-lg-4 col-md-4 col-sm-6 t_align_c t_xs_align_c">
                     <ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
@@ -12,6 +16,9 @@
                         <li><a href="orders_list.html" class="default_t_color">Orders List</a></li>
                         <li><a href="wishlist.html" class="default_t_color">Wishlist</a></li>
                         <li><a href="checkout.html" class="default_t_color">Checkout</a></li>
+                        @if (Auth::check())
+                        <li><a href="{{url('user/logout')}}" class="default_t_color">Logout</a></li>
+                        @endif
                     </ul>
                 </nav>
                 <div class="col-lg-4 col-md-4 col-sm-3 t_align_r t_xs_align_c">
@@ -43,7 +50,7 @@
     <section class="h_bot_part container">
         <div class="clearfix row">
             <div class="col-lg-2 t_md_align_c m_md_bottom_15">
-                <a href="index-2.html" class="logo d_md_inline_b">
+                <a href="{{ route('userDashboard') }}" class="logo d_md_inline_b">
                     <img src="{{URL::to('front_end_resource/images/logo.png')}}" alt="">
                 </a>
             </div>
@@ -125,7 +132,7 @@
                                         </div> 
                                         <div class="f_left f_xs_none">
                                             <!--<submit value="" name="">adsf</submit>-->
-                                            <button class="button_type_2 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15">Add to Cart</button>    
+                                            <button class="button_type_2 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15">search</button>    
                                         </div>
                                     </form>
                                 </div>
@@ -150,43 +157,45 @@
                         <a role="button" href="#" class="button_type_3 color_light bg_scheme_color d_block r_corners tr_delay_hover box_s_none">
                             <span class="d_inline_middle shop_icon">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span class="count tr_delay_hover type_2 circle t_align_c">3</span>
+                                <span class="count tr_delay_hover type_2 circle t_align_c">{{ count($cartProducts) }}</span>
                             </span>
-                            <b>$355</b>
+                            <b>TK. {{ Cart::getSubTotal() }}</b>
                         </a>
                         <div class="shopping_cart top_arrow tr_all_hover r_corners">
                             <div class="f_size_medium sc_header">Recently added item(s)</div>
                             <ul class="products_list">
-                                @foreach(session()->all() as $session)
+                                @if(!Cart::isEmpty())
+                                @foreach($cartProducts as $cartProduct)
                                 <li>
                                     <div class="clearfix">
                                         <!--product image-->
-                                        <img class="f_left m_right_10" src="{{URL::to('front_end_resource/images/shopping_c_img_1.jpg')}}" alt="">
+                                        <img class="f_left m_right_10" height="60" width="60" src="{{ URL::to(App\Model\Admin\ProductModel::getProductImageById($cartProduct['id'])->first()['image_path']) }}" alt="">
                                         <!--product description-->
                                         <div class="f_left product_description">
-                                            <a href="#" class="color_dark m_bottom_5 d_block">{{ session('product_name') }}</a>
-                                            <span class="f_size_medium">{{session('id')}}</span>
+                                            <a href="#" class="color_dark m_bottom_5 d_block">{{ $cartProduct['name'] }}</a>
+                                            <span class="f_size_medium">{{ $cartProduct['id'] }}</span>
                                         </div>
                                         <!--product price-->
                                         <div class="f_left f_size_medium">
                                             <div class="clearfix">
-                                                1 x <b class="color_dark">{{session('product_price')}}</b>
+                                                {{ $cartProduct['quantity'] }} x <b class="color_dark">{{ $cartProduct['price'] }}</b>
                                             </div>
-                                            <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i></button>
+                                            <button  value="{{ $cartProduct['id'] }}" class="close_product color_dark tr_hover" data-token="{{ csrf_token() }}"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
                                 </li>
                                 @endforeach
-                                <li>
+                                @endif
+<!--                                <li>
                                     <div class="clearfix">
-                                        <!--product image-->
+                                        product image
                                         <img class="f_left m_right_10" src="{{URL::to('front_end_resource/images/shopping_c_img_2.jpg')}}" alt="">
-                                        <!--product description-->
+                                        product description
                                         <div class="f_left product_description">
                                             <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
                                             <span class="f_size_medium">Product Code PS34</span>
                                         </div>
-                                        <!--product price-->
+                                        product price
                                         <div class="f_left f_size_medium">
                                             <div class="clearfix">
                                                 1 x <b class="color_dark">$99.00</b>
@@ -197,14 +206,14 @@
                                 </li>
                                 <li>
                                     <div class="clearfix">
-                                        <!--product image-->
+                                        product image
                                         <img class="f_left m_right_10" src="images/shopping_c_img_3.jpg" alt="">
-                                        <!--product description-->
+                                        product description
                                         <div class="f_left product_description">
                                             <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
                                             <span class="f_size_medium">Product Code PS34</span>
                                         </div>
-                                        <!--product price-->
+                                        product price
                                         <div class="f_left f_size_medium">
                                             <div class="clearfix">
                                                 1 x <b class="color_dark">$99.00</b>
@@ -212,13 +221,13 @@
                                             <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
-                                </li>
+                                </li>-->
                             </ul>
                             <!--total price-->
                             <ul class="total_price bg_light_color_1 t_align_r color_dark">
                                 <li class="m_bottom_10">Tax: <span class="f_size_large sc_price t_align_l d_inline_b m_left_15">$0.00</span></li>
                                 <li class="m_bottom_10">Discount: <span class="f_size_large sc_price t_align_l d_inline_b m_left_15">$37.00</span></li>
-                                <li>Total: <b class="f_size_large bold scheme_color sc_price t_align_l d_inline_b m_left_15">$999.00</b></li>
+                                <li>Total: <b class="f_size_large bold scheme_color sc_price t_align_l d_inline_b m_left_15" id="subtotal">TK. {{ Cart::getSubTotal() }}</b></li>
                             </ul>
                             <div class="sc_footer t_align_c">
                                 <a href="#" role="button" class="button_type_4 d_inline_middle bg_light_color_2 r_corners color_dark t_align_c tr_all_hover m_mxs_bottom_5">View Cart</a>
